@@ -84,7 +84,7 @@ const buildTestimonials = (mode: LandingMode): ITestimonial[] => {
 
 export const LANDING_CONFIG: ILandingConfig = {
   // 🌿 ONE WORD SWAPPABLE MODE: 'waitlist' | 'live'
-  mode: "live",
+  mode: "waitlist",
 
   storeLinks: STORE_LINKS,
   waitlistFormUrl: FORMSPREE_WAITLIST_URL,
