@@ -3,8 +3,6 @@
 // 🏛️ MeritMoon Landing Service (Law U14 & Architecture Compliance)
 // ==============================================================================
 
-import { api } from "../../services";
-
 export interface IWaitlistSubmissionResult {
   readonly success: boolean;
   readonly error?: string;
@@ -12,26 +10,42 @@ export interface IWaitlistSubmissionResult {
 
 export class LandingService {
   /**
-   * Submits an email address to the pre-launch waitlist endpoint reusing the shared API service.
+   * Submits an email address directly to external Formspree waitlist endpoint.
    */
   async submitWaitlist(
     url: string,
     email: string,
   ): Promise<IWaitlistSubmissionResult> {
-    const response = await api.post<{ ok?: boolean }>(
-      url,
-      { email },
-      { withCredentials: false },
-    );
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
 
-    if (response.data && !response.error) {
-      return { success: true };
+      if (response.ok) {
+        return { success: true };
+      }
+
+      const data = await response.json().catch(() => null);
+      const errorMessage =
+        data?.errors?.map((err: { message: string }) => err.message).join(", ") ||
+        data?.error ||
+        "Could not join waitlist. Please try again.";
+
+      return {
+        success: false,
+        error: errorMessage,
+      };
+    } catch {
+      return {
+        success: false,
+        error: "Network error. Please try again later.",
+      };
     }
-
-    return {
-      success: false,
-      error: response.error || "Something went wrong. Please try again.",
-    };
   }
 }
 
