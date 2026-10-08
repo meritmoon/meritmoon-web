@@ -1,88 +1,91 @@
-// src/modules/landing/components/LandingFooter.tsx
-
 import React from "react";
-import { LANDING_DATA } from "../constants";
-import { SocialProfiles } from "./SocialProfiles";
-import { TextLink } from "../../../design";
+import { Link } from "react-router-dom";
+import { icons } from "../../../assets";
 import AppRoutes from "../../../AppRoutes";
+import { STORE_LINKS, LANDING_CONFIG, LandingMode } from "../constants";
 
-export type LandingFooterPage = "home" | "vs" | "privacy" | "terms";
-
-export interface ILandingFooterProps {
-  activePage?: LandingFooterPage;
+export interface LandingFooterProps {
+  activePage?: string;
+  mode?: LandingMode;
 }
 
-export const LandingFooter: React.FC<ILandingFooterProps> = ({
-  activePage = "home",
+export const LandingFooter: React.FC<LandingFooterProps> = ({
+  mode = LANDING_CONFIG.mode,
 }) => {
-  return (
-    <div className="w-full">
-      {/* Glowing Divider matching Rex9 / LandingPage source of truth */}
-      <div className="w-4/5 max-w-5xl h-px mx-auto my-9 bg-linear-to-r from-transparent via-primary to-transparent shadow-[0_0_6px_rgba(var(--color-primary-rgb),0.3)]" />
+  const isWaitlist = (mode || LANDING_CONFIG.mode) === "waitlist";
 
-      {/* Footer Content with standard 80px (pb-20) ground truth bottom breathing room */}
-      <footer className="text-center space-y-3 pb-20">
-        <SocialProfiles profiles={LANDING_DATA.profiles} />
-        <div className="flex flex-wrap items-center justify-center gap-5 text-xs text-base-content/60 font-medium">
-          <TextLink
-            to={AppRoutes.client.public.ROOT}
-            className={`text-base-content/60 hover:text-primary transition-colors text-xs tracking-wider no-underline hover:underline ${
-              activePage === "home" ? "font-semibold text-primary!" : ""
-            }`}
-          >
-            RexOne Home
-          </TextLink>
-          <span className="text-base-content/30">•</span>
-          <TextLink
-            to={AppRoutes.client.public.VS}
-            className={`text-base-content/60 hover:text-primary transition-colors text-xs tracking-wider no-underline hover:underline ${
-              activePage === "vs" ? "font-semibold text-primary!" : ""
-            }`}
-          >
-            VS Page
-          </TextLink>
-          <span className="text-base-content/30">•</span>
-          <TextLink
-            to={`${AppRoutes.client.public.VS}#faq`}
-            className="text-base-content/60 hover:text-primary transition-colors text-xs tracking-wider no-underline hover:underline"
-          >
-            Comparison FAQs
-          </TextLink>
-          <span className="text-base-content/30">•</span>
-          <a
-            href={
-              activePage === "home"
-                ? "#FAQ"
-                : `${AppRoutes.client.public.ROOT}#FAQ`
-            }
-            className="text-base-content/60 hover:text-primary transition-colors text-xs tracking-wider no-underline hover:underline"
-          >
-            General FAQs
-          </a>
-          <span className="text-base-content/30">•</span>
-          <TextLink
-            to={AppRoutes.client.public.PRIVACY_POLICY}
-            className={`text-base-content/60 hover:text-primary transition-colors text-xs tracking-wider no-underline hover:underline ${
-              activePage === "privacy" ? "font-semibold text-primary!" : ""
-            }`}
-          >
-            Privacy Policy
-          </TextLink>
-          <span className="text-base-content/30">•</span>
-          <TextLink
-            to={AppRoutes.client.public.TERMS_AND_CONDITIONS}
-            className={`text-base-content/60 hover:text-primary transition-colors text-xs tracking-wider no-underline hover:underline ${
-              activePage === "terms" ? "font-semibold text-primary!" : ""
-            }`}
-          >
-            Terms & Conditions
-          </TextLink>
+  return (
+    <footer className="footer">
+      <div className="footer__top">
+        <div className="footer__brand">
+          <div className="moon-mascot moon-mascot--footer">
+            <img src={icons.mascot.src} alt="MeritMoon" />
+          </div>
+          <span className="footer__name">MeritMoon</span>
+          <p className="footer__sub">Discipline. Clarity. Transformation.</p>
+          <p className="footer__dhamma">
+            "As moonlight falls on every tree without choosing — may the merit
+            of practice reach all beings."
+          </p>
         </div>
-        <p className="text-xs text-base-content/50 font-medium">
-          © {new Date().getFullYear()} Rex9. Engineered with Soul & Clarity.
+        <div className="footer__nav">
+          <div className="fcol">
+            <h4>Practice</h4>
+            <a href="#courses">All Courses</a>
+            <a href="#promise">How Streaks Work</a>
+            <a href="#about">Our Teachers</a>
+            <a href="#how">The Traditions</a>
+          </div>
+          <div className="fcol">
+            <h4>Choose Your Path</h4>
+            <a href="#merit">How We Support Teachers</a>
+            <a href="#merit">Supported Teachers</a>
+            <a href="#merit">The Moonlit Path</a>
+            <a href="#voices">Gratitude Dedication</a>
+          </div>
+          <div className="fcol">
+            <h4>Community</h4>
+            <a href="#voices">Practitioner Circle</a>
+            <a href="#about">Retreat Directory</a>
+            <a href="#download">Ask a Teacher</a>
+            <a href="#download">Open Forum</a>
+          </div>
+          <div className="fcol">
+            <h4>Company</h4>
+            <a href="#about">Our Story</a>
+            <a href="#about">Why We Built This</a>
+            <Link to={AppRoutes.client.public.PRIVACY_POLICY}>Privacy Policy</Link>
+            <Link to={AppRoutes.client.public.TERMS_AND_CONDITIONS}>Terms & Conditions</Link>
+          </div>
+        </div>
+      </div>
+      <div className="footer__bottom">
+        <p>
+          © 2026 MeritMoon. Built with love. All merit offered to all beings,
+          everywhere.
         </p>
-      </footer>
-    </div>
+        <div className="footer__app-links">
+          <a
+            href={isWaitlist ? "#download" : STORE_LINKS.APP_STORE}
+            target={isWaitlist ? undefined : "_blank"}
+            rel={isWaitlist ? undefined : "noopener noreferrer"}
+            id="footer-link-apple"
+          >
+            App Store
+          </a>
+          <a
+            href={isWaitlist ? "#download" : STORE_LINKS.GOOGLE_PLAY}
+            target={isWaitlist ? undefined : "_blank"}
+            rel={isWaitlist ? undefined : "noopener noreferrer"}
+            id="footer-link-google"
+          >
+            Google Play
+          </a>
+          <Link to={AppRoutes.client.public.PRIVACY_POLICY}>Privacy Policy</Link>
+          <Link to={AppRoutes.client.public.TERMS_AND_CONDITIONS}>Terms & Conditions</Link>
+        </div>
+      </div>
+    </footer>
   );
 };
 

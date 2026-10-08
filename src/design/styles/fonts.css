@@ -1,15 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fauna+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;600;700&display=swap');
+@import '@fontsource/cormorant-garamond/300.css';
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/600.css';
+@import '@fontsource/cormorant-garamond/700.css';
 
 @font-face {
-  font-family: 'Clip';
-  src: url('../../assets/fonts/Clip.ttf') format('truetype');
-  font-weight: normal;
+  font-family: 'Moonjelly';
+  src: url('../../assets/fonts/Moonjelly-Light.otf') format('opentype');
+  font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: "Storytime";
-  src: url('../../assets/fonts/Storytime.ttf') format('truetype');
-  font-weight: normal;
+  font-family: 'Moonjelly';
+  src: url('../../assets/fonts/Moonjelly-Light.otf') format('opentype');
+  font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Moonjelly';
+  src: url('../../assets/fonts/Moonjelly-Light.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Moonjelly';
+  src: url('../../assets/fonts/Moonjelly-Bold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Moonjelly';
+  src: url('../../assets/fonts/Moonjelly-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Moonjelly';
+  src: url('../../assets/fonts/Moonjelly-Bold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
 }

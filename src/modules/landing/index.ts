@@ -1,7 +1,8 @@
 // src/modules/landing/index.ts
 
-export * from "./constants";
-export * from "./types";
 export * from "./components";
-export * from "./helpers";
 export * from "./pages";
+export * from "./constants";
+export * from "./data";
+export * from "./helpers";
+export * from "./types";

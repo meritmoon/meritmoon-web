@@ -93,7 +93,7 @@ export const HeadNavbar: React.FC<HeadNavbarProps> = ({
     <>
       <header
         className={cn(
-          "fixed left-0 right-0 top-0 z-30 flex h-16 items-center justify-between border-b border-base-300 bg-base-100 px-4 md:px-6",
+          "fixed left-0 right-0 top-0 z-30 flex h-16 items-center justify-between border-b border-glass-border bg-glass-nav backdrop-blur-md px-4 md:px-6 shadow-sm",
           className,
         )}
       >

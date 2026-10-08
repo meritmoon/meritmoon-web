@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { icons, iconsLib, images } from "../../../assets";
+import { icons } from "../../../assets";
 import AppRoutes from "../../../AppRoutes";
 import {
   Asset,
@@ -12,6 +12,7 @@ import {
   TextLink,
 } from "../../../design";
 import { LandingFooter } from "./LandingFooter";
+import { CustomCursor } from "./CustomCursor";
 
 export interface ILegalTocItem {
   id: string;
@@ -40,17 +41,6 @@ export const LegalLayout: React.FC<ILegalLayoutProps> = ({
     location.pathname === AppRoutes.client.public.PRIVACY_POLICY;
   const isTerms =
     location.pathname === AppRoutes.client.public.TERMS_AND_CONDITIONS;
-
-  // Enforce dark mode on legal pages
-  useEffect(() => {
-    const prevTheme = document.documentElement.getAttribute("data-theme");
-    document.documentElement.setAttribute("data-theme", "night");
-    return () => {
-      if (prevTheme) {
-        document.documentElement.setAttribute("data-theme", prevTheme);
-      }
-    };
-  }, []);
 
   // Track active section for table of contents
   useEffect(() => {
@@ -95,42 +85,31 @@ export const LegalLayout: React.FC<ILegalLayoutProps> = ({
   return (
     <div
       data-page="legal"
-      data-theme="night"
-      className="min-h-screen w-full text-glow-white font-primary selection:bg-primary selection:text-primary-content bg-repeat bg-fixed relative"
+      className="min-h-screen w-full bg-[#020A05] text-[#F4FAF0] font-sans selection:bg-[#2E8B57]/30 selection:text-[#E8F0E0] relative"
       style={{
-        backgroundImage: `url(${images.darkBrickWall.src})`,
-        cursor: `url(${images.spotCursor.src}) 15 15, auto`,
+        backgroundImage:
+          "radial-gradient(ellipse at 50% 0%, rgba(14, 46, 26, 0.45) 0%, rgba(2, 10, 5, 0.98) 75%)",
       }}
     >
-      <style>{`
-        [data-page="legal"],
-        [data-page="legal"] a,
-        [data-page="legal"] button,
-        [data-page="legal"] input,
-        [data-page="legal"] textarea,
-        [data-page="legal"] select {
-          cursor: url(${images.spotCursor.src}) 15 15, auto !important;
-        }
-      `}</style>
+      <CustomCursor />
 
-      {/* Top Cyber-Glass Header */}
-      <header className="sticky top-0 z-50 w-full bg-glass-nav backdrop-blur-xl border-b border-glass-border transition-all duration-300">
+      {/* Top Mindful Forest Header */}
+      <header className="sticky top-0 z-50 w-full bg-[#020A05]/85 backdrop-blur-xl border-b border-[#c8d8c0]/12 transition-all duration-300">
         <div className="max-w-7xl mx-auto h-16 sm:h-20 px-4 sm:px-6 md:px-8 flex items-center justify-between">
           {/* Brand Logo & Back to Root */}
           <TextLink
             to={AppRoutes.client.public.ROOT}
-            className="flex items-center gap-3 no-underline select-none group text-base-content! hover:no-underline"
-            aria-label="Return to RexOne Home"
+            className="flex items-center gap-3 no-underline select-none group text-white! hover:no-underline"
+            aria-label="Return to MeritMoon Home"
           >
-            <Asset
-              asset={icons.logo}
-              className="h-8 sm:h-9 w-8 sm:w-9 shrink-0 select-none transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_10px_rgba(var(--color-primary-rgb),0.6)]"
-            />
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#0d2616] border border-[#c8d8c0]/30 flex items-center justify-center overflow-hidden shrink-0 shadow-[0_0_12px_rgba(77,191,130,0.3)]">
+              <Asset asset={icons.mascot} className="w-7 h-7 object-contain" />
+            </div>
             <div className="flex items-center gap-2">
-              <span className="font-display text-2xl sm:text-3xl font-bold tracking-wider text-glow-white [text-shadow:0_0_7px_var(--color-glow-white),0_0_15px_rgba(var(--color-primary-rgb),0.85),0_0_30px_rgba(var(--color-primary-rgb),0.5)]">
-                RexOne
+              <span className="font-serif text-xl sm:text-2xl font-bold tracking-wide text-[#F4FAF0]">
+                MeritMoon
               </span>
-              <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-semibold uppercase tracking-wider bg-primary/15 text-primary-light border border-primary/30">
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-semibold uppercase tracking-wider bg-[#2E8B57]/20 text-[#7DDE92] border border-[#2E8B57]/40">
                 Legal
               </span>
             </div>
@@ -139,14 +118,14 @@ export const LegalLayout: React.FC<ILegalLayoutProps> = ({
           {/* Center Document Switcher Tabs */}
           <nav
             aria-label="Legal Documents"
-            className="hidden sm:flex items-center gap-1.5 p-1 rounded-full bg-base-300/40 border border-glass-border backdrop-blur-md text-xs sm:text-sm font-primary font-medium tracking-normal"
+            className="hidden sm:flex items-center gap-1.5 p-1 rounded-full bg-[#081a0e]/70 border border-[#c8d8c0]/15 backdrop-blur-md text-xs sm:text-sm font-medium"
           >
             <TextLink
               to={AppRoutes.client.public.PRIVACY_POLICY}
               className={`px-4 py-1.5 rounded-full transition-all duration-300 hover:no-underline cursor-pointer ${
                 isPrivacy
-                  ? "bg-primary text-primary-content shadow-[0_0_12px_rgba(var(--color-primary-rgb),0.5)] font-bold"
-                  : "text-base-content/75 hover:text-white"
+                  ? "bg-[#2E8B57] text-[#020A05] font-bold shadow-[0_0_12px_rgba(46,139,87,0.5)]"
+                  : "text-[#C8D8C0]/75 hover:text-white"
               }`}
             >
               Privacy Policy
@@ -155,39 +134,34 @@ export const LegalLayout: React.FC<ILegalLayoutProps> = ({
               to={AppRoutes.client.public.TERMS_AND_CONDITIONS}
               className={`px-4 py-1.5 rounded-full transition-all duration-300 hover:no-underline cursor-pointer ${
                 isTerms
-                  ? "bg-primary text-primary-content shadow-[0_0_12px_rgba(var(--color-primary-rgb),0.5)] font-bold"
-                  : "text-base-content/75 hover:text-white"
+                  ? "bg-[#2E8B57] text-[#020A05] font-bold shadow-[0_0_12px_rgba(46,139,87,0.5)]"
+                  : "text-[#C8D8C0]/75 hover:text-white"
               }`}
             >
               Terms &amp; Conditions
             </TextLink>
           </nav>
 
-          {/* Right Action: Star Button (matching Home & VS) */}
+          {/* Right Action: Return to App */}
           <div className="flex items-center gap-2">
             <Button
-              href="https://github.com/rex-9/rexone-core"
-              target="_blank"
-              rel="noopener noreferrer"
+              to={AppRoutes.client.public.ROOT}
               variant={ButtonVariants.PRIMARY}
               size={ComponentSizes.SM}
-              className="font-semibold shadow-[0_0_15px_rgba(var(--color-primary-rgb),0.4)] px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm inline-flex items-center gap-1.5 sm:gap-2"
             >
-              <iconsLib.sparkles className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-warning fill-warning" />
-              <span className="hidden sm:inline">Star on GitHub</span>
-              <span className="sm:hidden">Star</span>
+              Back to Home
             </Button>
           </div>
         </div>
 
         {/* Mobile Sub-Navigation Tabs */}
-        <div className="sm:hidden flex border-t border-glass-border/60 bg-base-300/30 px-4 py-2 justify-center gap-2 text-xs font-primary font-medium">
+        <div className="sm:hidden flex border-t border-[#c8d8c0]/12 bg-[#041208]/90 px-4 py-2 justify-center gap-2 text-xs font-medium">
           <TextLink
             to={AppRoutes.client.public.PRIVACY_POLICY}
             className={`px-3 py-1 rounded-full transition-all duration-300 hover:no-underline cursor-pointer ${
               isPrivacy
-                ? "bg-primary text-primary-content font-bold shadow-[0_0_8px_rgba(var(--color-primary-rgb),0.4)]"
-                : "text-base-content/75 hover:text-white"
+                ? "bg-[#2E8B57] text-[#020A05] font-bold shadow-[0_0_8px_rgba(46,139,87,0.5)]"
+                : "text-[#C8D8C0]/75 hover:text-white"
             }`}
           >
             Privacy Policy
@@ -196,8 +170,8 @@ export const LegalLayout: React.FC<ILegalLayoutProps> = ({
             to={AppRoutes.client.public.TERMS_AND_CONDITIONS}
             className={`px-3 py-1 rounded-full transition-all duration-300 hover:no-underline cursor-pointer ${
               isTerms
-                ? "bg-primary text-primary-content font-bold shadow-[0_0_8px_rgba(var(--color-primary-rgb),0.4)]"
-                : "text-base-content/75 hover:text-white"
+                ? "bg-[#2E8B57] text-[#020A05] font-bold shadow-[0_0_8px_rgba(46,139,87,0.5)]"
+                : "text-[#C8D8C0]/75 hover:text-white"
             }`}
           >
             Terms &amp; Conditions
@@ -206,63 +180,31 @@ export const LegalLayout: React.FC<ILegalLayoutProps> = ({
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8 pt-8 sm:pt-12 pb-0">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-10 sm:py-16 space-y-12">
         {/* Document Header Hero */}
-        <div className="mb-8 sm:mb-12 text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/15 border border-primary/30 text-primary-light text-xs font-semibold tracking-wider uppercase drop-shadow-[0_0_8px_rgba(var(--color-primary-rgb),0.4)]">
-            <span>RexOne Covenant & Legal</span>
-            <span className="text-primary/50">•</span>
+        <div className="max-w-3xl space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2E8B57]/15 border border-[#2E8B57]/30 text-xs font-mono font-medium text-[#7DDE92]">
             <span>{lastUpdated}</span>
           </div>
-
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-white">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F4FAF0]">
             {title}
           </h1>
-
-          <p className="text-sm sm:text-base text-base-content/75 leading-relaxed font-primary">
+          <p className="text-base sm:text-lg text-[#C8D8C0]/85 leading-relaxed">
             {subtitle}
           </p>
         </div>
-
-        {/* Mobile Horizontal Scrollable Table of Contents */}
-        {tableOfContents.length > 0 && (
-          <div className="lg:hidden mb-8">
-            <div className="p-3 rounded-xl bg-glass-card border border-glass-border backdrop-blur-md">
-              <div className="text-xs uppercase tracking-wider text-base-content/50 font-bold mb-2 px-1 flex items-center gap-1.5">
-                <iconsLib.search className="w-3.5 h-3.5 text-primary" />
-                <span>Jump to Section</span>
-              </div>
-              <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent">
-                {tableOfContents.map((item) => (
-                  <a
-                    key={item.id}
-                    href={`#${item.id}`}
-                    onClick={(e) => handleTocClick(e, item.id)}
-                    className={`shrink-0 px-3 py-1 rounded-lg text-xs font-medium transition-all duration-200 border ${
-                      activeSection === item.id
-                        ? "bg-primary text-primary-content border-primary shadow-[0_0_10px_rgba(var(--color-primary-rgb),0.4)]"
-                        : "bg-base-300/40 text-base-content/70 border-glass-border hover:text-glow-white hover:border-primary/50"
-                    }`}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Two-Column Grid: TOC + Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Desktop Sticky Table of Contents */}
           {tableOfContents.length > 0 && (
             <aside className="hidden lg:block lg:col-span-4 sticky top-28 space-y-4">
-              <div className="p-5 rounded-2xl bg-glass-card border border-glass-border backdrop-blur-md space-y-4 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
-                <div className="border-b border-glass-border pb-3 flex items-center justify-between">
-                  <h2 className="font-display text-sm font-bold tracking-wider text-glow-white uppercase">
+              <div className="p-5 rounded-2xl bg-[#041208]/75 border border-[#c8d8c0]/15 backdrop-blur-md space-y-4 shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+                <div className="border-b border-[#c8d8c0]/12 pb-3 flex items-center justify-between">
+                  <h2 className="font-serif text-sm font-bold tracking-wider text-[#F4FAF0] uppercase">
                     Table of Contents
                   </h2>
-                  <span className="text-xs text-base-content/50 font-mono">
+                  <span className="text-xs text-[#C8D8C0]/50 font-mono">
                     {tableOfContents.length} Sections
                   </span>
                 </div>
@@ -277,15 +219,15 @@ export const LegalLayout: React.FC<ILegalLayoutProps> = ({
                         onClick={(e) => handleTocClick(e, item.id)}
                         className={`group flex items-center gap-3 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 ${
                           isActive
-                            ? "bg-primary/15 text-primary-light border-l-2 border-primary font-semibold shadow-[0_0_12px_rgba(var(--color-primary-rgb),0.15)]"
-                            : "text-base-content/65 hover:text-glow-white hover:bg-base-300/30"
+                            ? "bg-[#2E8B57]/20 text-[#7DDE92] border-l-2 border-[#2E8B57] font-semibold shadow-[0_0_12px_rgba(46,139,87,0.2)]"
+                            : "text-[#C8D8C0]/65 hover:text-[#F4FAF0] hover:bg-[#081a0e]/40"
                         }`}
                       >
                         <span
                           className={`font-mono text-xs w-5 text-right shrink-0 ${
                             isActive
-                              ? "text-primary font-bold"
-                              : "text-base-content/40 group-hover:text-base-content/70"
+                              ? "text-[#7DDE92] font-bold"
+                              : "text-[#C8D8C0]/40 group-hover:text-[#C8D8C0]/70"
                           }`}
                         >
                           {String(index + 1).padStart(2, "0")}
@@ -296,13 +238,13 @@ export const LegalLayout: React.FC<ILegalLayoutProps> = ({
                   })}
                 </nav>
 
-                <div className="pt-3 border-t border-glass-border/60 text-xs text-base-content/50 space-y-2">
-                  <p>Questions or legal notices?</p>
+                <div className="pt-3 border-t border-[#c8d8c0]/12 text-xs text-[#C8D8C0]/50 space-y-2">
+                  <p>Questions or legal inquiries?</p>
                   <a
-                    href="mailto:rex@rex9.me"
-                    className="inline-flex items-center gap-1.5 text-primary hover:underline font-semibold"
+                    href="mailto:legal@meritmoon.com"
+                    className="inline-flex items-center gap-1.5 text-[#7DDE92] hover:underline font-semibold"
                   >
-                    <span>rex@rex9.me</span>
+                    <span>legal@meritmoon.com</span>
                   </a>
                 </div>
               </div>
@@ -313,7 +255,7 @@ export const LegalLayout: React.FC<ILegalLayoutProps> = ({
           <article
             className={`w-full ${
               tableOfContents.length > 0 ? "lg:col-span-8" : "lg:col-span-12"
-            } p-6 sm:p-10 rounded-2xl bg-glass-card border border-glass-border backdrop-blur-md space-y-10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] leading-relaxed text-base-content/90`}
+            } p-6 sm:p-10 rounded-2xl bg-[#041208]/75 border border-[#c8d8c0]/15 backdrop-blur-md space-y-10 shadow-[0_8px_32px_rgba(0,0,0,0.6)] leading-relaxed text-[#E0EBE0]`}
           >
             {children}
           </article>

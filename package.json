@@ -57,6 +57,7 @@
     "react-router-dom": "^7.18.3",
     "recharts": "^3.10.1",
     "tailwind-merge": "^3.6.0",
+    "three": "^0.186.1",
     "ts-clsx": "^2.4.1"
   },
   "devDependencies": {
@@ -66,6 +67,7 @@
     "@types/node": "^25.9.5",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
+    "@types/three": "^0.186.0",
     "@vitejs/plugin-react": "^6.1.1",
     "baseline-browser-mapping": "^2.11.21",
     "daisyui": "^5.7.28",

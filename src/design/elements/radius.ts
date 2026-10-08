@@ -3,7 +3,8 @@
 /**
  * Border Radius Tokens
  *
- * Soft & gentle radius system matching mobile radius tokens.
+ * Soft & gentle radius system matching MeritMoon atomic design system.
+ * Cards: 24px, Buttons: 50px pill.
  */
 
 export const radius = {
@@ -11,6 +12,10 @@ export const radius = {
   sm: "8px",
   md: "12px", // Default
   lg: "16px",
+  xl: "20px",
+  "2xl": "24px",
+  card: "24px",
+  pill: "50px",
   full: "999px",
 } as const;
 

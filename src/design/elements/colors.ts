@@ -1,117 +1,124 @@
 // src/design/elements/colors.ts
 
 export const colors = {
-  // Brand (Rex9 Neon Scarlet Red Palette - More Red, Less Pink)
-  primary: "#FF2238",
-  primaryLight: "#FF5263",
-  primaryDark: "#CC1125",
-  secondary: "#FF4D2E",
-  accent: "#FF0D2D",
+  // Brand (MeritMoon Forest Moonlit Night Palette)
+  primary: "#2E8B57", // Deep forest emerald
+  primaryLight: "#4DBF82", // Radiant emerald bright
+  primaryDark: "#1A5235", // Deep forest shadow emerald
+  secondary: "#C8D8C0", // Silver, moonlight through leaves
+  secondaryLight: "#E8F0E0", // Silver bright
+  secondaryDark: "#7A8C74", // Silver dim
+  accent: "#D4A853", // Warm moonbeam gold
+  accentLight: "#F0C870", // Gold bright
+  accentDark: "#7A5A20", // Gold dim
+  ruby: "#C24B5A", // Twilight bloom / warnings
+  rubyLight: "#E87088", // Ruby bright
+  rubyDark: "#7A2030", // Ruby dim
 
-  // Neon Glow Colors
-  glowWhite: "#FFF2F4",
-  glowOuter: "#5C0916",
+  // Moon Glow Colors
+  glowWhite: "#FFFFFF",
+  glowOuter: "#2E8B57",
 
   // Shadow color tokens
   shadows: {
-    blackXs: "rgba(0, 0, 0, 0.08)",
-    blackSm: "rgba(0, 0, 0, 0.08)",
-    blackMd: "rgba(0, 0, 0, 0.10)",
-    glow: "rgba(255, 34, 56, 0.4)",
-    glassCard: "rgba(255, 34, 56, 0.35)",
-    glassHover: "rgba(255, 34, 56, 0.45)",
-    textDark: "rgba(0, 0, 0, 0.9)",
+    blackXs: "rgba(0, 0, 0, 0.25)",
+    blackSm: "rgba(0, 0, 0, 0.30)",
+    blackMd: "rgba(0, 0, 0, 0.35)",
+    glow: "rgba(46, 139, 87, 0.45)",
+    glassCard: "rgba(46, 139, 87, 0.20)",
+    glassHover: "rgba(77, 191, 130, 0.35)",
+    textDark: "rgba(2, 10, 5, 0.95)",
   },
 
   // Semantic (Unified across Light & Dark themes)
   semantic: {
-    success: "#10B981",
-    warning: "#F59E0B",
-    error: "#EF4444",
-    info: "#38BDF8",
+    success: "#4DBF82", // Emerald bright
+    warning: "#F0C870", // Gold bright
+    error: "#E87088", // Ruby bright
+    info: "#C8D8C0", // Silver
   },
 
   // Centralized Text Tokens (Single Source of Truth)
   text: {
     day: {
-      primary: "#000000",
-      primaryRgb: "0, 0, 0",
-      secondary: "#000000",
-      muted: "#111827",
+      primary: "#020A05", // Deep forest night
+      primaryRgb: "2, 10, 5",
+      secondary: "#1A5235", // Deep emerald
+      muted: "#6D856B",
     },
     night: {
-      primary: "#FFFFFF",
-      primaryRgb: "255, 255, 255",
-      secondary: "#FFFFFF",
-      muted: "#F8FAFC",
+      primary: "#F4FAF0", // Pure luminous silver-white
+      primaryRgb: "244, 250, 240",
+      secondary: "#CADBC6", // Mid silver
+      muted: "#8FA78C", // Dim silver
     },
   },
 
-  // Day Theme (White / Light Mode - Red & Black, Industrial Standard High Contrast)
+  // Day Theme (White / Light Mode - Crisp Lunar Silver-White & Forest Emerald)
   day: {
-    primary: "#FF2238",
-    primaryRgb: "255, 34, 56",
-    primaryLight: "#FF5263",
-    primaryDark: "#CC1125",
-    background: "#FFFFFF",
+    primary: "#2E8B57",
+    primaryRgb: "46, 139, 87",
+    primaryLight: "#4DBF82",
+    primaryDark: "#1A5235",
+    background: "#F4FAF0",
     surface: "#FFFFFF",
-    card: "#F8F8FA",
-    border: "#E5E7EB",
-    divider: "#F3F4F6",
-    textPrimary: "#000000",
-    textSecondary: "#000000",
-    textMuted: "#111827",
-    glowWhite: "#FFF2F4",
-    glowOuter: "#5C0916",
-    glowOuterRgb: "92, 9, 22",
+    card: "#E8F0E0",
+    border: "#CADBC6",
+    divider: "#E0EBDC",
+    textPrimary: "#020A05",
+    textSecondary: "#1A5235",
+    textMuted: "#6D856B",
+    glowWhite: "#FFFFFF",
+    glowOuter: "#2E8B57",
+    glowOuterRgb: "46, 139, 87",
   },
 
-  // Night Theme (Dark Mode - Rex9 Scarlet Red & Pure White, High Contrast)
+  // Night Theme (Dark Mode - Forest Night, Deep Ancient Woods)
   night: {
-    primary: "#FF2238",
-    primaryRgb: "255, 34, 56",
-    primaryLight: "#FF5263",
-    primaryDark: "#CC1125",
-    background: "#160b11",
-    surface: "#1f1018",
-    card: "#26131e",
-    border: "#3d1b28",
-    divider: "#2c111c",
-    textPrimary: "#FFFFFF",
-    textSecondary: "#FFFFFF",
-    textMuted: "#F8FAFC",
-    glowWhite: "#FFF2F4",
-    glowOuter: "#5C0916",
-    glowOuterRgb: "92, 9, 22",
+    primary: "#2E8B57",
+    primaryRgb: "46, 139, 87",
+    primaryLight: "#4DBF82",
+    primaryDark: "#1A5235",
+    background: "#020A05", // Canvas scaffold / forest floor
+    surface: "#071A0D", // Modals, elevated surfaces
+    card: "#041209", // Mid-depth forest
+    border: "rgba(200, 216, 192, 0.14)", // border-glass
+    divider: "rgba(200, 216, 192, 0.10)", // border-moss
+    textPrimary: "#F4FAF0", // Primary headings & copy
+    textSecondary: "#CADBC6", // Body text
+    textMuted: "#8FA78C", // Metadata & captions
+    glowWhite: "#FFFFFF",
+    glowOuter: "#2E8B57",
+    glowOuterRgb: "46, 139, 87",
   },
 
-  // Rex9 Glassmorphism Tokens
+  // MeritMoon Glassmorphism Tokens
   glass: {
-    nav: "rgba(22, 7, 13, 0.75)",
-    card: "rgba(35, 12, 20, 0.38)",
-    cardHover: "rgba(50, 16, 28, 0.55)",
-    form: "rgba(28, 8, 16, 0.65)",
-    project: "rgba(18, 6, 12, 0.55)",
-    projectHover: "rgba(22, 7, 15, 0.75)",
-    border: "rgba(255, 34, 56, 0.22)",
-    borderHover: "rgba(255, 34, 56, 0.55)",
-    tag: "rgba(255, 34, 56, 0.65)",
-    tagBg: "rgba(255, 34, 56, 0.08)",
-    tagBgHover: "rgba(255, 34, 56, 0.28)",
+    nav: "rgba(4, 16, 9, 0.65)",
+    card: "rgba(6, 22, 13, 0.28)",
+    cardHover: "rgba(10, 34, 19, 0.42)",
+    form: "rgba(7, 26, 13, 0.55)",
+    project: "rgba(6, 22, 13, 0.28)",
+    projectHover: "rgba(10, 34, 19, 0.42)",
+    border: "rgba(200, 216, 192, 0.14)",
+    borderHover: "rgba(77, 191, 130, 0.48)",
+    tag: "rgba(46, 139, 87, 0.85)",
+    tagBg: "rgba(46, 139, 87, 0.12)",
+    tagBgHover: "rgba(46, 139, 87, 0.25)",
   },
 
   // Centralized Glow & Text Shadow Effects
   effects: {
     heroSign:
-      "0 0 0.6rem var(--color-glow-white), 0 0 1.5rem var(--color-primary), -0.2rem 0.1rem 1rem var(--color-primary), 0.2rem 0.1rem 1rem var(--color-primary), 0 -0.5rem 2rem var(--color-primary-dark), 0 0.5rem 3rem var(--color-primary-dark)",
+      "0 0 14px rgba(46, 139, 87, 0.5), 0 0 28px rgba(26, 82, 53, 0.3)",
     headingGlow:
-      "0 0 0.6rem var(--color-glow-white), 0 0 1.5rem var(--color-primary), -0.2rem 0.1rem 1rem var(--color-primary), 0.2rem 0.1rem 1rem var(--color-primary), 0 -0.5rem 2rem var(--color-primary-dark), 0 0.5rem 3rem var(--color-primary-dark)",
+      "0 0 18px rgba(46, 139, 87, 0.5)",
     cardHeading:
-      "0 0 6px var(--color-glow-white), 0 0 12px var(--color-primary), 0 0 18px var(--color-primary-dark)",
+      "0 0 10px rgba(200, 216, 192, 0.35)",
     navActive:
-      "0 0 6px var(--color-glow-white), 0 0 12px var(--color-primary), 0 0 16px var(--color-primary-dark), 0 0 22px var(--color-glow-outer)",
+      "0 0 12px var(--color-primary), 0 0 24px rgba(46, 139, 87, 0.45)",
     flickerFull:
-      "-1px -1px 0px var(--color-glow-white), 1px 1px 0px var(--color-glow-white), 0 0 10px var(--color-glow-white), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary), 0 0 40px var(--color-primary), 0 0 50px var(--color-primary-dark), 0 0 70px var(--color-primary-dark), 0 0 80px var(--color-glow-outer), 0 0 100px var(--color-glow-outer)",
+      "0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px var(--color-primary), 0 0 40px var(--color-primary-dark)",
   },
 } as const;
 

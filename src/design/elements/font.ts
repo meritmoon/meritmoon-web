@@ -1,18 +1,19 @@
 // src/design/elements/font.ts
 
 /**
- * RexOne Design System - Typography Tokens
+ * MeritMoon Design System - Typography Tokens
  *
- * Primary UI: Quicksand
- * Display: Clip
- * Handwritten: Storytime
+ * Display / Nav / Eyebrows: Moonjelly, Cormorant SC, serif
+ * Headings: Cormorant Garamond, Georgia, serif
+ * Body Text: Fauna One, Georgia, serif, sans-serif
  */
 
 export const font = {
   fontFamily: {
-    primary: '"Quicksand", sans-serif',
-    display: '"Clip", cursive, sans-serif',
-    handwritten: '"Storytime", cursive',
+    primary: '"Fauna One", Georgia, serif, sans-serif',
+    display: '"Moonjelly", "Cormorant SC", serif',
+    serif: '"Cormorant Garamond", Georgia, serif',
+    handwritten: '"Moonjelly", cursive',
     mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
   },
 

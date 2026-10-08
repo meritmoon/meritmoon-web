@@ -1,1 +1,2 @@
-export * from "./landingDomain.helper";
+// src/modules/landing/helpers/index.ts
+export * from "./data.helper";

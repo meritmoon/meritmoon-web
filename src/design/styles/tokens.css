@@ -1,0 +1,91 @@
+/* src/design/styles/tokens.css */
+/* MeritMoon Forest Moonlit Night Design System Tokens — Single Source of Truth */
+
+:root {
+  /* Core palette */
+  --silver: #C8D8C0;
+  --emerald: #2E8B57;
+  --ruby: #C24B5A;
+  --gold: #D4A853;
+
+  /* Lighter / brighter tones */
+  --silver-bright: #E8F0E0;
+  --emerald-bright: #4DBF82;
+  --ruby-bright: #E87088;
+  --gold-bright: #F0C870;
+
+  /* Dimmer / shadow tones */
+  --silver-dim: #7A8C74;
+  --emerald-dim: #1A5235;
+  --ruby-dim: #7A2030;
+  --gold-dim: #7A5A20;
+
+  /* Gradients */
+  --grad-base: linear-gradient(90deg, #C8D8C0 0%, #2E8B57 100%);
+  --grad-base-135: linear-gradient(135deg, #C8D8C0 0%, #2E8B57 100%);
+  --grad-base-diag: linear-gradient(135deg, #E8F0E0 0%, #C8D8C0 40%, #2E8B57 100%);
+  --grad-glow: linear-gradient(90deg, #C24B5A 0%, #D4A853 100%);
+  --grad-glow-135: linear-gradient(135deg, #C24B5A 0%, #D4A853 100%);
+
+  /* Backgrounds */
+  --bg-deep: #020A05;
+  --bg-mid: #041209;
+  --bg-surface: #071A0D;
+
+  /* Frozen Glassmorphism */
+  --bg-glass-card: rgba(6, 22, 13, 0.22);
+  --bg-glass-card-hover: rgba(10, 34, 19, 0.35);
+  --bg-glass-card-lit: rgba(12, 40, 22, 0.30);
+  --bg-glass-nav: rgba(4, 16, 9, 0.65);
+  --border-glass: rgba(200, 216, 192, 0.15);
+  --border-glass-hover: rgba(77, 191, 130, 0.48);
+  --glass-blur: 20px;
+  --glass-blur-heavy: 28px;
+  --shadow-glass-card: 0 16px 40px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.16), inset 0 0 24px rgba(200, 216, 192, 0.03);
+  --shadow-glass-card-hover: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 25px rgba(77, 191, 130, 0.20), inset 0 1px 1px rgba(255, 255, 255, 0.28);
+
+  /* Card backgrounds */
+  --bg-card: var(--bg-glass-card);
+  --bg-card-lit: var(--bg-glass-card-lit);
+
+  /* Forest atmosphere */
+  --forest-shadow: rgba(2, 10, 5, 0.7);
+  --moonlight-tint: rgba(200, 216, 192, 0.06);
+  --moonbeam: rgba(200, 216, 192, 0.12);
+
+  /* Glows */
+  --glow-silver: 0 0 24px rgba(200, 216, 192, 0.35), 0 0 60px rgba(200, 216, 192, 0.12);
+  --glow-emerald: 0 0 24px rgba(46, 139, 87, 0.45), 0 0 60px rgba(46, 139, 87, 0.15);
+  --glow-ruby: 0 0 24px rgba(194, 75, 90, 0.55), 0 0 60px rgba(194, 75, 90, 0.2);
+  --glow-gold: 0 0 24px rgba(212, 168, 83, 0.55), 0 0 60px rgba(212, 168, 83, 0.2);
+  --glow-forest: 0 0 80px rgba(46, 139, 87, 0.2), 0 0 200px rgba(200, 216, 192, 0.06);
+
+  /* Button Glow Tokens */
+  --glow-btn-primary: 0 0 14px rgba(46, 139, 87, 0.5), 0 0 28px rgba(26, 82, 53, 0.3);
+  --glow-btn-primary-hover: 0 0 12px var(--emerald-bright), 0 0 26px var(--emerald), 0 0 50px rgba(26, 82, 53, 0.8), inset 0 0 14px rgba(255, 255, 255, 0.35);
+  --glow-btn-ghost-hover: 0 0 10px var(--emerald-bright), 0 0 24px rgba(46, 139, 87, 0.45), 0 0 45px rgba(26, 82, 53, 0.25);
+
+  /* High contrast text tokens */
+  --text-light: #F4FAF0;
+  --text-mid: #CADBC6;
+  --text-dim: #8FA78C;
+  --text-dimmer: #6D856B;
+
+  /* Borders */
+  --border-moss: rgba(200, 216, 192, 0.1);
+  --border-glow: rgba(77, 191, 130, 0.35);
+  --border-emerald: rgba(46, 139, 87, 0.35);
+
+  /* Typography */
+  --font-display: 'Moonjelly', 'Cormorant SC', serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Fauna One', Georgia, serif;
+
+  /* Animation Easing & Layout */
+  --ease-forest: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --container: 1180px;
+  --pad-section: 140px;
+  --pad-x: 48px;
+}

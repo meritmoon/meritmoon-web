@@ -55,7 +55,7 @@ export const Dialog: React.FC<IDialogProps> = ({
     >
       <div
         className={cn(
-          "modal-box relative z-10 bg-base-100 border border-base-300 rounded-2xl p-6 shadow-xl",
+          "modal-box relative z-10 bg-base-100/95 dark:bg-[#071A0D]/95 border border-glass-border rounded-2xl p-6 shadow-glass-card backdrop-blur-xl",
           "w-full max-w-md max-h-[90dvh] overflow-y-auto font-primary",
           className,
         )}

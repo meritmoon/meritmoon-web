@@ -23,7 +23,7 @@ export const PrivacyPolicyPage: React.FC = () => {
   return (
     <LegalLayout
       title="Privacy Policy"
-      subtitle="At RexOne, sovereign architecture and user trust go hand in hand. This policy describes how we collect, safeguard, and honor your personal data across the RexOne ecosystem."
+      subtitle="At MeritMoon, user trust and mindful practice go hand in hand. This policy describes how we collect, safeguard, and honor your personal data across the MeritMoon platform."
       lastUpdated="Effective Date: September 21, 2026"
       tableOfContents={PRIVACY_TOC}
     >
@@ -39,26 +39,17 @@ export const PrivacyPolicyPage: React.FC = () => {
         </div>
         <p className="text-base-content/80 text-sm sm:text-base leading-relaxed">
           This Privacy Policy governs the collection, processing, and storage of
-          personal data by <strong>Rex9 / RexOne</strong> ("RexOne", "we", "us",
-          or "our") when you access or interact with our web client (
-          <code className="text-primary font-mono text-xs px-1.5 py-0.5 rounded bg-base-300/60">
-            rexone.rex9.me
-          </code>
-          ), core APIs (
-          <code className="text-primary font-mono text-xs px-1.5 py-0.5 rounded bg-base-300/60">
-            api.rexone.rex9.me
-          </code>
-          ), mobile applications, and services operating under{" "}
+          personal data by <strong>MeritMoon</strong> ("we", "us", or "our")
+          when you access or interact with our web application, core APIs,
+          mobile applications, and services operating under{" "}
           <code className="text-primary font-mono text-xs px-1.5 py-0.5 rounded bg-base-300/60">
             meritmoon.com
           </code>
           .
         </p>
         <p className="text-base-content/80 text-sm sm:text-base leading-relaxed">
-          We adhere to the foundational engineering doctrine:{" "}
-          <em>"Start from One. Not from Zero."</em> Privacy and cryptographic
-          safety are not afterthoughts bolted on before release—they are built
-          directly into our domain models, API authorization tiers, and storage
+          Privacy and cryptographic data protection are built directly into our
+          domain models, API authorization tiers, and secure storage
           abstractions.
         </p>
       </section>
@@ -169,7 +160,7 @@ export const PrivacyPolicyPage: React.FC = () => {
             preventing automated abuse or credential stuffing.
           </li>
           <li>
-            <strong>We NEVER Sell Your Data:</strong> RexOne does not sell,
+            <strong>We NEVER Sell Your Data:</strong> MeritMoon does not sell,
             rent, monetize, or trade your personal data or uploaded media to
             third-party data brokers or advertisers.
           </li>
@@ -313,7 +304,7 @@ export const PrivacyPolicyPage: React.FC = () => {
           </h2>
         </div>
         <p className="text-base-content/80 text-sm sm:text-base leading-relaxed">
-          RexOne uses browser storage exclusively for functional,
+          MeritMoon uses browser storage exclusively for functional,
           authentication, and security purposes. We do not use third-party
           advertising cookies, behavioral tracking pixels, or cross-site
           fingerprinting.
@@ -345,7 +336,7 @@ export const PrivacyPolicyPage: React.FC = () => {
           </h2>
         </div>
         <p className="text-base-content/80 text-sm sm:text-base leading-relaxed">
-          Regardless of your physical jurisdiction, RexOne provides all users
+          Regardless of your physical jurisdiction, MeritMoon provides all users
           with full sovereignty over their data:
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
@@ -393,7 +384,7 @@ export const PrivacyPolicyPage: React.FC = () => {
           </h2>
         </div>
         <p className="text-base-content/80 text-sm sm:text-base leading-relaxed">
-          RexOne provides AI-driven assistants, chat channels, and background
+          MeritMoon provides AI-driven assistants, chat channels, and background
           runs. Your personal prompts, private chats, and confidential inputs
           are strictly isolated per account and are{" "}
           <strong>never used to train public foundational AI models</strong>.
@@ -458,26 +449,26 @@ export const PrivacyPolicyPage: React.FC = () => {
           If you have questions, data protection requests, or legal notices
           regarding this policy, please reach out directly:
         </p>
-        <div className="p-4 rounded-xl bg-base-300/30 border border-glass-border space-y-2 text-sm">
+        <div className="p-5 rounded-xl bg-[#081a0e]/60 border border-[#c8d8c0]/15 space-y-2 text-sm">
           <p>
-            <strong>Rex9 Engineering & MeritMoon Operations</strong>
+            <strong className="text-[#F4FAF0]">MeritMoon Operations &amp; Privacy</strong>
           </p>
-          <p className="text-xs sm:text-sm text-base-content/80">
-            Support & Privacy Email:{" "}
+          <p className="text-xs sm:text-sm text-[#C8D8C0]/85">
+            Support &amp; Privacy Inquiries:{" "}
             <a
-              href="mailto:rex@rex9.me"
-              className="text-primary hover:underline font-semibold"
+              href="mailto:legal@meritmoon.com"
+              className="text-[#7DDE92] hover:underline font-semibold"
             >
-              rex@rex9.me
+              legal@meritmoon.com
             </a>
           </p>
-          <p className="text-xs sm:text-sm text-base-content/80">
-            Lead Architect Email:{" "}
+          <p className="text-xs sm:text-sm text-[#C8D8C0]/85">
+            General Support:{" "}
             <a
-              href="mailto:rex@rex9.me"
-              className="text-primary hover:underline font-semibold"
+              href="mailto:support@meritmoon.com"
+              className="text-[#7DDE92] hover:underline font-semibold"
             >
-              rex@rex9.me
+              support@meritmoon.com
             </a>
           </p>
         </div>

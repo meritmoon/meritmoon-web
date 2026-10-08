@@ -8,6 +8,7 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: parseInt(process.env.VITE_PORT || process.env.PORT || "4000"), // Default to 4000 for local dev
+    allowedHosts: true,
   },
   optimizeDeps: {
     include: [

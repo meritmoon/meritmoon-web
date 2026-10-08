@@ -1,11 +1,11 @@
 {
-  "name": "RexOne Sovereign Ecosystem",
-  "short_name": "RexOne",
-  "description": "Start from One. Not from Zero. Sovereign tri-platform application foundation & full-stack masterclass.",
+  "name": "MeritMoon — A Kinder Mind Changes Everything",
+  "short_name": "MeritMoon",
+  "description": "The discipline-first meditation platform rooted in ancient wisdom. Practice timeless meditation techniques, build unbroken daily discipline, and unlock lifelong peace.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#160b11",
-  "theme_color": "#160b11",
+  "background_color": "#020A05",
+  "theme_color": "#020A05",
   "icons": [
     {
       "src": "/favicon-192x192.png",
@@ -14,10 +14,16 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/favicon.png",
+      "src": "/favicon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

@@ -23,7 +23,7 @@ export const TermsPage: React.FC = () => {
   return (
     <LegalLayout
       title="Terms & Conditions"
-      subtitle="The covenant between Rex9 and our community. Clear rules, sovereign principles, and transparent terms governing the RexOne ecosystem."
+      subtitle="Clear guidelines, mindful principles, and transparent terms governing the MeritMoon platform."
       lastUpdated="Effective Date: September 21, 2026"
       tableOfContents={TERMS_TOC}
     >
@@ -38,18 +38,11 @@ export const TermsPage: React.FC = () => {
           </h2>
         </div>
         <p className="text-base-content/80 text-sm sm:text-base leading-relaxed">
-          Welcome to RexOne. By accessing, browsing, registering for, or using
-          any portion of the RexOne web client (
-          <code className="text-primary font-mono text-xs px-1.5 py-0.5 rounded bg-base-300/60">
-            rexone.rex9.me
-          </code>
-          ), API endpoints (
-          <code className="text-primary font-mono text-xs px-1.5 py-0.5 rounded bg-base-300/60">
-            api.rexone.rex9.me
-          </code>
-          ), mobile clients, or related services (collectively, the "Platform"),
-          you enter into a legally binding covenant with{" "}
-          <strong>Rex9 / RexOne</strong> ("RexOne", "we", "us", or "our").
+          Welcome to MeritMoon. By accessing, browsing, registering for, or using
+          any portion of the MeritMoon web application, API endpoints,
+          mobile clients, or related services (collectively, the "Platform"),
+          you enter into a legally binding agreement with{" "}
+          <strong>MeritMoon</strong> ("we", "us", or "our").
         </p>
         <p className="text-base-content/80 text-sm sm:text-base leading-relaxed">
           If you do not agree to these Terms and Conditions or our accompanying{" "}
@@ -77,7 +70,7 @@ export const TermsPage: React.FC = () => {
           </h2>
         </div>
         <p className="text-base-content/80 text-sm sm:text-base leading-relaxed">
-          To use RexOne, you affirm that you are at least 16 years old (or the
+          To use MeritMoon, you affirm that you are at least 16 years old (or the
           age of legal majority in your country of residence) and possess full
           legal authority to enter into these terms.
         </p>
@@ -114,9 +107,9 @@ export const TermsPage: React.FC = () => {
           </h2>
         </div>
         <p className="text-base-content/80 text-sm sm:text-base leading-relaxed">
-          RexOne is engineered as a sovereign, high-discipline foundation. You
-          agree never to use or attempt to use the platform in ways that
-          degrade, exploit, or subvert its integrity. Prohibited conduct
+          MeritMoon is engineered as a dedicated meditation and mindfulness
+          platform. You agree never to use or attempt to use the platform in ways
+          that degrade, exploit, or subvert its integrity. Prohibited conduct
           includes:
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
@@ -158,7 +151,7 @@ export const TermsPage: React.FC = () => {
               Spam & Unauthorized Relay
             </h4>
             <p className="text-base-content/75 leading-relaxed">
-              Using RexOne's notification or messaging pipelines for unsolicited
+              Using MeritMoon's notification or messaging pipelines for unsolicited
               bulk messages, phishing, or financial scams.
             </p>
           </div>
@@ -178,9 +171,9 @@ export const TermsPage: React.FC = () => {
           </h2>
         </div>
         <p className="text-base-content/80 text-sm sm:text-base leading-relaxed">
-          RexOne offers free access tiers, one-time product licenses, and
-          recurring premium subscriptions. All payment transactions are powered
-          by Stripe Inc.
+          MeritMoon offers free access tiers, course licenses, and recurring
+          premium subscriptions. All payment transactions are powered by Stripe
+          Inc.
         </p>
 
         <div className="space-y-3 text-xs sm:text-sm text-base-content/80">
@@ -246,16 +239,16 @@ export const TermsPage: React.FC = () => {
         </div>
         <div className="space-y-3 text-sm text-base-content/80">
           <p>
-            <strong>RexOne Proprietary Assets:</strong> All software
+            <strong>MeritMoon Proprietary Assets:</strong> All software
             architecture, codebases, design tokens, logos, visual trademarks,
-            documentation, and interface layouts are the sovereign property of
-            Rex9 and its licensors. Open-source components are provided under
+            documentation, and interface layouts are the property of
+            MeritMoon and its licensors. Open-source components are provided under
             their respective open-source licenses.
           </p>
           <p>
             <strong>Your Content Sovereignty:</strong> You retain complete
             ownership of any media, documents, text, code, or digital assets you
-            upload to RexOne. By uploading content, you grant RexOne only the
+            upload to MeritMoon. By uploading content, you grant MeritMoon only the
             limited, non-exclusive license strictly necessary to store, encode,
             and transmit your content back to you and your authorized users.
           </p>
@@ -275,7 +268,7 @@ export const TermsPage: React.FC = () => {
           </h2>
         </div>
         <p className="text-base-content/80 text-sm sm:text-base leading-relaxed">
-          RexOne includes artificial intelligence modules, generative chat
+          MeritMoon includes artificial intelligence modules, generative chat
           assistants, and automated background runs. You acknowledge and agree
           that:
         </p>
@@ -290,7 +283,7 @@ export const TermsPage: React.FC = () => {
             in production, legal, financial, or critical applications.
           </li>
           <li>
-            RexOne makes no warranty that AI features will be error-free or
+            MeritMoon makes no warranty that AI features will be error-free or
             uninterrupted.
           </li>
         </ul>
@@ -351,8 +344,8 @@ export const TermsPage: React.FC = () => {
             PURPOSE, AND NON-INFRINGEMENT.
           </p>
           <p className="leading-relaxed">
-            TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL REX9,
-            REXONE, ITS ARCHITECTS, OR AFFILIATES BE LIABLE FOR ANY INDIRECT,
+            TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL
+            MERITMOON, ITS ARCHITECTS, OR AFFILIATES BE LIABLE FOR ANY INDIRECT,
             INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR LOSS OF
             PROFITS, REVENUE, DATA, OR USE, ARISING OUT OF OR IN CONNECTION WITH
             YOUR ACCESS OR USE OF THE PLATFORM.
@@ -398,7 +391,7 @@ export const TermsPage: React.FC = () => {
           We may modify these Terms occasionally to accommodate legal updates,
           platform growth, or new features. When changes are published, the
           "Effective Date" at the top of this document will be updated. Your
-          continued use of RexOne after changes take effect constitutes your
+          continued use of MeritMoon after changes take effect constitutes your
           binding acceptance of the modified Terms.
         </p>
       </section>
@@ -419,26 +412,26 @@ export const TermsPage: React.FC = () => {
           For legal notices, service concerns, or partnership agreements,
           contact our operational team:
         </p>
-        <div className="p-4 rounded-xl bg-base-300/30 border border-glass-border space-y-2 text-sm">
+        <div className="p-5 rounded-xl bg-[#081a0e]/60 border border-[#c8d8c0]/15 space-y-2 text-sm">
           <p>
-            <strong>Rex9 Engineering & MeritMoon Operations</strong>
+            <strong className="text-[#F4FAF0]">MeritMoon Legal &amp; Operations</strong>
           </p>
-          <p className="text-xs sm:text-sm text-base-content/80">
-            Official Legal & Support Email:{" "}
+          <p className="text-xs sm:text-sm text-[#C8D8C0]/85">
+            Official Legal &amp; Support Email:{" "}
             <a
-              href="mailto:rex@rex9.me"
-              className="text-primary hover:underline font-semibold"
+              href="mailto:legal@meritmoon.com"
+              className="text-[#7DDE92] hover:underline font-semibold"
             >
-              rex@rex9.me
+              legal@meritmoon.com
             </a>
           </p>
-          <p className="text-xs sm:text-sm text-base-content/80">
-            Creator & Lead Architect:{" "}
+          <p className="text-xs sm:text-sm text-[#C8D8C0]/85">
+            General Support:{" "}
             <a
-              href="mailto:rex@rex9.me"
-              className="text-primary hover:underline font-semibold"
+              href="mailto:support@meritmoon.com"
+              className="text-[#7DDE92] hover:underline font-semibold"
             >
-              rex@rex9.me
+              support@meritmoon.com
             </a>
           </p>
         </div>

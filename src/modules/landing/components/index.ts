@@ -1,21 +1,28 @@
 // src/modules/landing/components/index.ts
 
 export { LandingNav } from "./LandingNav";
-export { NeonSign } from "./NeonSign";
-export { SocialProfiles } from "./SocialProfiles";
-export { SkillCard } from "./SkillCard";
-export { ProjectCard } from "./ProjectCard";
-export { TestimonialCard } from "./TestimonialCard";
-export { ContactForm } from "./ContactForm";
-export { SponsorCard } from "./SponsorCard";
-export { CandleQuoteCard } from "./CandleQuoteCard";
-export { DoctrineCard } from "./DoctrineCard";
-export { FeatureShowcase } from "./FeatureShowcase";
 export { LegalLayout } from "./LegalLayout";
-export { ProductHuntBadge } from "./ProductHuntBadge";
-export { ComparisonSection } from "./ComparisonSection";
-export { FaqSection, GENERAL_FAQS, COMPARISON_FAQS } from "./FaqSection";
-export type { IFaqItem, IFaqSectionProps } from "./FaqSection";
+export { ForestCanvas } from "./ForestCanvas";
+export { Fireflies } from "./Fireflies";
+export { FallingLeaves } from "./FallingLeaves";
+export { AmbientMesh } from "./AmbientMesh";
+export { HeroSection } from "./HeroSection";
+export { TickerSection } from "./TickerSection";
+export { PromiseSection } from "./PromiseSection";
+export { HowSection } from "./HowSection";
+export { CoursesSection } from "./CoursesSection";
+export { AboutSection } from "./AboutSection";
+export { MeritSection } from "./MeritSection";
+export { MindsetSection } from "./MindsetSection";
+export { VoicesSection } from "./VoicesSection";
+export { CtaSection } from "./CtaSection";
+export { FaqSection } from "./FaqSection";
 export { LandingFooter } from "./LandingFooter";
-export type { LandingFooterPage, ILandingFooterProps } from "./LandingFooter";
-
+export { CustomCursor } from "./CustomCursor";
+export { HeroMoonThree } from "./HeroMoonThree";
+export {
+  ButtonFireflySwarm,
+  attachButtonFireflySwarm,
+  useButtonFireflies,
+} from "./ButtonFireflies";
+export { WaitlistForm } from "./WaitlistForm";

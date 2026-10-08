@@ -20,13 +20,12 @@ import mediumSvg from "./design/medium.svg";
 import twitterSvg from "./design/twitter.svg";
 import instagramIcon from "./icons/instagram.svg";
 import googleIcon from "./icons/google.svg";
-import rexoneLogoSvg from "./icons/rexone-logo.svg";
+import meritmoonLogoSvg from "./icons/logo.svg";
+import mascotSvg from "./icons/mascot.svg";
+import mascotMeditatingSvg from "./icons/mascot-meditating.svg";
+import mascotJoyfulSvg from "./icons/mascot-joyful.svg";
+import grassFieldSvg from "./icons/grass-field.svg";
 import quoteIcon from "./icons/quote.svg";
-
-// Projects Images (RexOne Repos Only)
-import rexoneCoreImg from "./images/rexone-core.jpg";
-import rexoneWebImg from "./images/rexone-web.jpg";
-import rexoneMobileImg from "./images/rexone-mobile.jpg";
 
 // Icons (Library components - Heroicons, Lucide, etc.)
 import {
@@ -118,26 +117,15 @@ export const images = {
 } as const;
 
 // ============================================================
-// PROJECT ASSETS (RexOne Ecosystem Only)
-// ============================================================
-
-export const projectImages = {
-  rexoneCore: { src: rexoneCoreImg, alt: "RexOne Core", title: "RexOne Core" },
-  rexoneWeb: { src: rexoneWebImg, alt: "RexOne Web", title: "RexOne Web" },
-  rexoneMobile: {
-    src: rexoneMobileImg,
-    alt: "RexOne Mobile",
-    title: "RexOne Mobile",
-  },
-} as const;
-
-// ============================================================
 // ICON ASSETS (for Asset component)
 // ============================================================
 
 export const icons = {
-  logo: { src: rexoneLogoSvg, alt: "MeritMoon Logo", title: "MeritMoon" },
-  rexoneLogo: { src: rexoneLogoSvg, alt: "MeritMoon Logo", title: "MeritMoon" },
+  logo: { src: meritmoonLogoSvg, alt: "MeritMoon Logo", title: "MeritMoon" },
+  mascot: { src: mascotSvg, alt: "MeritMoon Full Moon Mascot", title: "MeritMoon Mascot" },
+  mascotMeditating: { src: mascotMeditatingSvg, alt: "MeritMoon Meditating Mascot", title: "MeritMoon Meditating" },
+  mascotJoyful: { src: mascotJoyfulSvg, alt: "MeritMoon Joyful Mascot", title: "MeritMoon Joyful" },
+  grassField: { src: grassFieldSvg, alt: "Grass Field", title: "Grass Field" },
   instagram: { src: instagramIcon, alt: "Instagram icon", title: "Instagram" },
   google: { src: googleIcon, alt: "Google icon", title: "Google" },
   github: { src: githubSvg, alt: "GitHub", title: "GitHub" },

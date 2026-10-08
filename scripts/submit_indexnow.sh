@@ -5,12 +5,12 @@
 
 set -e
 
-HOST="${1:-rexone.rex9.me}"
+HOST="${1:-meritmoon.com}"
 KEY="9f8b2c4e1a7d3e5b6c8e9a0d2b4c6e8a"
 KEY_LOCATION="https://${HOST}/${KEY}.txt"
 
 echo "============================================================"
-echo "📡 SUBMITTING REXONE TO INDEXNOW PROTOCOL"
+echo "📡 SUBMITTING MERITMOON TO INDEXNOW PROTOCOL"
 echo "   Host: $HOST"
 echo "   Endpoints: Bing, Yandex, Naver, Seznam"
 echo "============================================================"
