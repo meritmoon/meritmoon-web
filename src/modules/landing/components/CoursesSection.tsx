@@ -13,24 +13,48 @@ export const CoursesSection: React.FC<ICoursesSectionProps> = ({
 }) => {
   const activeMode = mode || LANDING_CONFIG.mode;
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [cardWidth, setCardWidth] = useState(344);
+  const [perView, setPerView] = useState(3);
   const trackRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number>(0);
 
-  const getPerView = () => {
-    if (typeof window === "undefined") return 3;
-    return Math.max(1, Math.floor(window.innerWidth / 348));
-  };
+  const updateDimensions = useCallback(() => {
+    if (typeof window === "undefined") return;
 
-  const [perView, setPerView] = useState(3);
+    const isMobile = window.innerWidth <= 768;
+    setPerView(isMobile ? 1 : Math.max(1, Math.floor(window.innerWidth / 348)));
 
-  useEffect(() => {
-    const updatePerView = () => setPerView(getPerView());
-    updatePerView();
-    window.addEventListener("resize", updatePerView);
-    return () => window.removeEventListener("resize", updatePerView);
+    if (trackRef.current && trackRef.current.children.length >= 2) {
+      const cards = trackRef.current.children;
+      const firstCard = cards[0] as HTMLElement;
+      const secondCard = cards[1] as HTMLElement;
+      const measuredStep = secondCard.offsetLeft - firstCard.offsetLeft;
+      if (measuredStep > 0) {
+        setCardWidth(measuredStep);
+        return;
+      }
+    }
+
+    if (trackRef.current && trackRef.current.firstElementChild) {
+      const firstCard = trackRef.current.firstElementChild as HTMLElement;
+      setCardWidth(firstCard.offsetWidth + 24);
+      return;
+    }
+
+    setCardWidth(isMobile ? window.innerWidth - 24 : 344);
   }, []);
 
+  useEffect(() => {
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, [updateDimensions]);
+
   const maxIndex = Math.max(0, LANDING_COURSES.length - perView);
+
+  useEffect(() => {
+    setCurrentIndex((prev) => Math.min(prev, maxIndex));
+  }, [maxIndex]);
 
   const goTo = useCallback(
     (idx: number) => {
@@ -57,8 +81,6 @@ export const CoursesSection: React.FC<ICoursesSectionProps> = ({
       goTo(dx < 0 ? currentIndex + 1 : currentIndex - 1);
     }
   };
-
-  const cardWidth = 340 + 24; // 340px width + 24px gap
 
   return (
     <section className="courses" id="courses">

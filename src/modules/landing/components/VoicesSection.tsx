@@ -13,24 +13,48 @@ export const VoicesSection: React.FC<IVoicesSectionProps> = ({
   const testimonials = config.testimonials;
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [cardWidth, setCardWidth] = useState(584);
+  const [perView, setPerView] = useState(2);
   const trackRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number>(0);
 
-  const getPerView = () => {
-    if (typeof window === "undefined") return 2;
-    return Math.max(1, Math.floor(window.innerWidth / 588));
-  };
+  const updateDimensions = useCallback(() => {
+    if (typeof window === "undefined") return;
 
-  const [perView, setPerView] = useState(2);
+    const isMobile = window.innerWidth <= 768;
+    setPerView(isMobile ? 1 : Math.max(1, Math.floor(window.innerWidth / 588)));
 
-  useEffect(() => {
-    const updatePerView = () => setPerView(getPerView());
-    updatePerView();
-    window.addEventListener("resize", updatePerView);
-    return () => window.removeEventListener("resize", updatePerView);
+    if (trackRef.current && trackRef.current.children.length >= 2) {
+      const cards = trackRef.current.children;
+      const firstCard = cards[0] as HTMLElement;
+      const secondCard = cards[1] as HTMLElement;
+      const measuredStep = secondCard.offsetLeft - firstCard.offsetLeft;
+      if (measuredStep > 0) {
+        setCardWidth(measuredStep);
+        return;
+      }
+    }
+
+    if (trackRef.current && trackRef.current.firstElementChild) {
+      const firstCard = trackRef.current.firstElementChild as HTMLElement;
+      setCardWidth(firstCard.offsetWidth + 24);
+      return;
+    }
+
+    setCardWidth(isMobile ? window.innerWidth - 24 : 584);
   }, []);
 
+  useEffect(() => {
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, [updateDimensions]);
+
   const maxIndex = Math.max(0, testimonials.length - perView);
+
+  useEffect(() => {
+    setCurrentIndex((prev) => Math.min(prev, maxIndex));
+  }, [maxIndex]);
 
   const goTo = useCallback(
     (idx: number) => {
@@ -50,8 +74,6 @@ export const VoicesSection: React.FC<IVoicesSectionProps> = ({
       goTo(dx < 0 ? currentIndex + 1 : currentIndex - 1);
     }
   };
-
-  const cardWidth = 520 + 24;
 
   return (
     <section className="voices" id="voices">

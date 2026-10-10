@@ -17,23 +17,43 @@ export const HeroSection: React.FC<IHeroSectionProps> = ({
   const faceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Parallax scroll on hero moon
+    // Parallax scroll on hero moon with RAF throttling
+    let scrollRafId: number | null = null;
     const handleScroll = () => {
-      if (!moonRef.current) return;
-      const y = window.scrollY;
-      if (y < window.innerHeight) {
-        moonRef.current.style.transform = `translateY(${y * 0.08}px)`;
-      }
+      if (scrollRafId !== null) return;
+      scrollRafId = requestAnimationFrame(() => {
+        scrollRafId = null;
+        if (!moonRef.current) return;
+        const y = window.scrollY;
+        if (y < window.innerHeight) {
+          moonRef.current.style.transform = `translateY(${y * 0.08}px)`;
+        }
+      });
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Eye follow cursor
+    // Eye follow cursor for CSS fallback (cached bounds & skipped when 3D Three.js is active)
+    let cachedFaceRect: DOMRect | null = null;
+    const updateFaceRect = () => {
+      if (faceRef.current) {
+        cachedFaceRect = faceRef.current.getBoundingClientRect();
+      }
+    };
+    updateFaceRect();
+
     const handleMouseMove = (e: MouseEvent) => {
       const face = faceRef.current;
       if (!face) return;
-      const r = face.getBoundingClientRect();
-      const fcx = r.left + r.width / 2;
-      const fcy = r.top + r.height / 2;
+      // When Three.js is active, the CSS face is hidden; skip processing
+      if (face.closest(".has-three")) return;
+
+      if (!cachedFaceRect) {
+        updateFaceRect();
+      }
+      if (!cachedFaceRect) return;
+
+      const fcx = cachedFaceRect.left + cachedFaceRect.width / 2;
+      const fcy = cachedFaceRect.top + cachedFaceRect.height / 2;
       const dx = e.clientX - fcx;
       const dy = e.clientY - fcy;
       const dist = Math.sqrt(dx * dx + dy * dy);
@@ -44,14 +64,15 @@ export const HeroSection: React.FC<IHeroSectionProps> = ({
         eye.style.transform = `translate(${mx}px, ${my}px)`;
       });
     };
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("resize", updateFaceRect, { passive: true });
 
-    // Periodic gentle blink
+    // Periodic gentle blink for CSS fallback face
     let blinkTimeout: number;
     const scheduleBlink = () => {
       blinkTimeout = window.setTimeout(() => {
         const face = faceRef.current;
-        if (face) {
+        if (face && !face.closest(".has-three")) {
           face.querySelectorAll<HTMLElement>(".mm-eye").forEach((eye) => {
             eye.style.transform = `${eye.style.transform || ""} scaleY(0.08)`;
             setTimeout(() => {
@@ -65,8 +86,10 @@ export const HeroSection: React.FC<IHeroSectionProps> = ({
     scheduleBlink();
 
     return () => {
+      if (scrollRafId !== null) cancelAnimationFrame(scrollRafId);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", updateFaceRect);
       clearTimeout(blinkTimeout);
     };
   }, []);

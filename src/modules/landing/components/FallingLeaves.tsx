@@ -8,9 +8,28 @@ export const FallingLeaves: React.FC = () => {
     if (!container) return;
 
     let isDisposed = false;
+    let rafId: number | null = null;
+    let isVisible = true;
+    let isTabActive = !document.hidden;
+
     const leafColors = ["#4DBF82", "#7ABD90", "#C8D8C0", "#D4A853"];
     const count = 3;
-    const activeLeaves: HTMLDivElement[] = [];
+
+    interface ILeafInstance {
+      el: HTMLDivElement;
+      startX: number;
+      startY: number;
+      endX: number;
+      endY: number;
+      duration: number;
+      startTime: number;
+      swayAmp: number;
+      swayFreq: number;
+      rotSpeedZ: number;
+      rotSpeedY: number;
+    }
+
+    const leaves: ILeafInstance[] = [];
 
     const leafSvg = `
       <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,57 +40,82 @@ export const FallingLeaves: React.FC = () => {
       </svg>
     `;
 
-    const spawnLeaf = (i: number) => {
-      if (isDisposed) return;
-      const leaf = document.createElement("div");
-      leaf.className = "falling-leaf";
-      leaf.innerHTML = leafSvg;
-
+    const resetLeaf = (leaf: ILeafInstance, offsetTime: number) => {
       const size = 16 + Math.random() * 10;
       const color = leafColors[Math.floor(Math.random() * leafColors.length)];
-      leaf.style.width = `${size}px`;
-      leaf.style.height = `${size}px`;
-      leaf.style.color = color;
+      leaf.el.style.width = `${size}px`;
+      leaf.el.style.height = `${size}px`;
+      leaf.el.style.color = color;
 
-      container.appendChild(leaf);
-      activeLeaves.push(leaf);
+      leaf.startX = Math.random() * (window.innerWidth * 0.7);
+      leaf.startY = -40 - Math.random() * 40;
+      leaf.endX = leaf.startX + (Math.random() * 160 + 60);
+      leaf.endY = window.innerHeight + 50;
+      leaf.duration = 14000 + Math.random() * 8000;
+      leaf.startTime = performance.now() + offsetTime;
+      leaf.swayAmp = 30 + Math.random() * 25;
+      leaf.swayFreq = 0.0015 + Math.random() * 0.001;
+      leaf.rotSpeedZ = (Math.random() - 0.5) * 0.003;
+      leaf.rotSpeedY = 0.002 + Math.random() * 0.002;
+    };
 
-      const startX = Math.random() * (window.innerWidth * 0.7);
-      const startY = -40 - Math.random() * 40;
-      const endX = startX + (Math.random() * 160 + 60);
-      const endY = window.innerHeight + 50;
-      const duration = 14000 + Math.random() * 8000;
-      const startTime = performance.now() + i * 4500 + Math.random() * 2000;
-      const swayAmp = 30 + Math.random() * 25;
-      const swayFreq = 0.0015 + Math.random() * 0.001;
-      const rotSpeedZ = (Math.random() - 0.5) * 0.003;
-      const rotSpeedY = 0.002 + Math.random() * 0.002;
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement("div");
+      el.className = "falling-leaf";
+      el.innerHTML = leafSvg;
+      container.appendChild(el);
 
-      const step = (now: number) => {
-        if (isDisposed) {
-          leaf.remove();
-          return;
-        }
-        if (now < startTime) {
-          requestAnimationFrame(step);
-          return;
-        }
-        const elapsed = now - startTime;
-        const progress = elapsed / duration;
+      const leaf: ILeafInstance = {
+        el,
+        startX: 0,
+        startY: 0,
+        endX: 0,
+        endY: 0,
+        duration: 0,
+        startTime: 0,
+        swayAmp: 0,
+        swayFreq: 0,
+        rotSpeedZ: 0,
+        rotSpeedY: 0,
+      };
+      resetLeaf(leaf, i * 4500 + Math.random() * 2000);
+      leaves.push(leaf);
+    }
+
+    const startLoop = () => {
+      if (!rafId && isVisible && isTabActive) {
+        rafId = requestAnimationFrame(tick);
+      }
+    };
+
+    const stopLoop = () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    };
+
+    const tick = (now: number) => {
+      if (isDisposed || !isVisible || !isTabActive) {
+        rafId = null;
+        return;
+      }
+
+      leaves.forEach((leaf) => {
+        if (now < leaf.startTime) return;
+        const elapsed = now - leaf.startTime;
+        const progress = elapsed / leaf.duration;
 
         if (progress >= 1) {
-          leaf.remove();
-          const idx = activeLeaves.indexOf(leaf);
-          if (idx > -1) activeLeaves.splice(idx, 1);
-          spawnLeaf(0);
+          resetLeaf(leaf, 0);
           return;
         }
 
-        const currentY = startY + progress * (endY - startY);
+        const currentY = leaf.startY + progress * (leaf.endY - leaf.startY);
         const currentX =
-          startX + progress * (endX - startX) + Math.sin(now * swayFreq) * swayAmp;
-        const rotZ = now * rotSpeedZ * 180;
-        const rotY = Math.sin(now * rotSpeedY) * 65;
+          leaf.startX + progress * (leaf.endX - leaf.startX) + Math.sin(now * leaf.swayFreq) * leaf.swayAmp;
+        const rotZ = now * leaf.rotSpeedZ * 180;
+        const rotY = Math.sin(now * leaf.rotSpeedY) * 65;
         const opacity =
           progress < 0.1
             ? progress / 0.1
@@ -79,22 +123,46 @@ export const FallingLeaves: React.FC = () => {
               ? (1 - progress) / 0.15
               : 0.75;
 
-        leaf.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotateZ(${rotZ}deg) rotateY(${rotY}deg)`;
-        leaf.style.opacity = `${opacity}`;
+        leaf.el.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotateZ(${rotZ}deg) rotateY(${rotY}deg)`;
+        leaf.el.style.opacity = `${opacity}`;
+      });
 
-        requestAnimationFrame(step);
-      };
-
-      requestAnimationFrame(step);
+      rafId = requestAnimationFrame(tick);
     };
 
-    for (let i = 0; i < count; i++) {
-      spawnLeaf(i);
-    }
+    startLoop();
+
+    // Viewport intersection observer to pause when scrolled away
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        isVisible = entry ? entry.isIntersecting : true;
+        if (isVisible) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
+
+    const handleVisibilityChange = () => {
+      isTabActive = !document.hidden;
+      if (isTabActive && isVisible) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       isDisposed = true;
-      activeLeaves.forEach((l) => l.remove());
+      stopLoop();
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      leaves.forEach((l) => l.el.remove());
     };
   }, []);
 

@@ -11,8 +11,10 @@ import {
 } from "../../constants";
 import { ButtonFireflySwarm } from "./ButtonFireflies";
 
-export interface IButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size"> {
+export interface IButtonProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "size"
+> {
   variant?: ButtonVariant;
   size?: ComponentSize;
   fullWidth?: boolean;
@@ -56,10 +58,10 @@ export const Button: React.FC<IButtonProps> = ({
       "btn--forest",
       "bg-[linear-gradient(135deg,#C8D8C0_0%,#2E8B57_100%)] !text-[#020A05] [color:#020A05] [-webkit-text-fill-color:#020A05]",
       "border border-[#4DBF82]/40 shadow-[0_0_14px_rgba(46,139,87,0.5),0_0_28px_rgba(26,82,53,0.3)]",
-      "hover:-translate-y-[3px] hover:scale-[1.02] hover:bg-[#4DBF82] hover:border-[#4DBF82]",
+      "hover:scale-[1.02] hover:bg-[#4DBF82] hover:border-[#4DBF82]",
       "hover:shadow-[0_0_12px_#4DBF82,0_0_26px_#2E8B57,0_0_50px_rgba(26,82,53,0.8),inset_0_0_14px_rgba(255,255,255,0.35)]",
       "hover:!text-[#020A05] hover:[color:#020A05] hover:[-webkit-text-fill-color:#020A05]",
-      "active:translate-y-0 active:scale-[0.98]",
+      "active:scale-[0.98]",
       // Gloss sheen overlay
       "after:content-[''] after:absolute after:inset-0 after:rounded-full after:bg-[linear-gradient(135deg,rgba(255,255,255,0.25)_0%,transparent_60%)] after:opacity-0 hover:after:opacity-100 after:transition-opacity after:duration-350 after:pointer-events-none",
     ),
@@ -69,10 +71,10 @@ export const Button: React.FC<IButtonProps> = ({
       "btn--forest btn--neon",
       "bg-[linear-gradient(135deg,#E8F0E0_0%,#4DBF82_45%,#2E8B57_100%)] !text-[#020A05] [color:#020A05] [-webkit-text-fill-color:#020A05]",
       "border border-[#4DBF82] shadow-[0_0_24px_rgba(77,191,130,0.7),0_0_50px_rgba(46,139,87,0.4)]",
-      "hover:-translate-y-[3px] hover:scale-[1.03] hover:bg-[#4DBF82]",
+      "hover:scale-[1.03] hover:bg-[#4DBF82]",
       "hover:shadow-[0_0_36px_rgba(77,191,130,0.85),0_0_70px_rgba(46,139,87,0.5)]",
       "hover:!text-[#020A05] hover:[color:#020A05]",
-      "active:translate-y-0 active:scale-[0.98]",
+      "active:scale-[0.98]",
     ),
 
     // Secondary / Ghost (.btn--ghost): frozen dark glass card, silver border, emerald hover glow
@@ -82,11 +84,11 @@ export const Button: React.FC<IButtonProps> = ({
       "!text-[#F4FAF0] [color:#F4FAF0] [-webkit-text-fill-color:#F4FAF0]",
       "border border-[rgba(200,216,192,0.15)]",
       "shadow-[0_16px_40px_rgba(0,0,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.16),inset_0_0_24px_rgba(200,216,192,0.03)]",
-      "hover:-translate-y-[3px] hover:border-[#4DBF82] hover:bg-[rgba(10,34,19,0.35)]",
+      "hover:border-[#4DBF82] hover:bg-[rgba(10,34,19,0.35)]",
       "hover:!text-white hover:[color:#ffffff] hover:[-webkit-text-fill-color:#ffffff]",
       "hover:shadow-[0_0_10px_#4DBF82,0_0_24px_rgba(46,139,87,0.45),0_0_45px_rgba(26,82,53,0.25)]",
       "hover:[text-shadow:0_0_8px_#4DBF82]",
-      "active:translate-y-0 active:scale-[0.98]",
+      "active:scale-[0.98]",
     ),
 
     // Tertiary: subtle translucent text button
@@ -98,14 +100,19 @@ export const Button: React.FC<IButtonProps> = ({
 
   // Authentic MeritMoon Size Tiers (Height & Padding matching OG pixel specs)
   const sizeClasses: Record<ComponentSize, string> = {
-    [ComponentSizes.XS]: "min-h-[30px] px-3.5 py-1 text-[0.68rem] tracking-[0.12em]",
+    [ComponentSizes.XS]:
+      "min-h-[30px] px-3.5 py-1 text-[0.68rem] tracking-[0.12em]",
     // SM: Exact Nav Pill dimensions (padding: 9px 24px, 38px tall)
-    [ComponentSizes.SM]: "min-h-[38px] px-6 py-[9px] text-[0.72rem] tracking-[0.16em]",
+    [ComponentSizes.SM]:
+      "min-h-[38px] px-6 py-[9px] text-[0.72rem] tracking-[0.16em]",
     // MD: Exact Standard Button dimensions (padding: 14px 36px, 48-50px tall)
-    [ComponentSizes.MD]: "min-h-[48px] px-9 py-[14px] text-[0.82rem] tracking-[0.14em]",
+    [ComponentSizes.MD]:
+      "min-h-[48px] px-9 py-[14px] text-[0.82rem] tracking-[0.14em]",
     // LG: Exact Large Hero/CTA dimensions (padding: 16px 42px, 54px tall)
-    [ComponentSizes.LG]: "min-h-[54px] px-10 py-4 text-[0.88rem] tracking-[0.15em]",
-    [ComponentSizes.XL]: "min-h-[60px] px-12 py-4.5 text-[0.95rem] tracking-[0.15em]",
+    [ComponentSizes.LG]:
+      "min-h-[54px] px-10 py-4 text-[0.88rem] tracking-[0.15em]",
+    [ComponentSizes.XL]:
+      "min-h-[60px] px-12 py-4.5 text-[0.95rem] tracking-[0.15em]",
   };
 
   const buttonClasses = cn(
@@ -116,7 +123,8 @@ export const Button: React.FC<IButtonProps> = ({
     variantClasses[variant] || variantClasses[ButtonVariants.PRIMARY],
     sizeClasses[size] || sizeClasses[ComponentSizes.MD],
     fullWidth && "w-full",
-    (disabled || isLoading) && "opacity-50 cursor-not-allowed pointer-events-none",
+    (disabled || isLoading) &&
+      "opacity-50 cursor-not-allowed pointer-events-none",
     isLoading && "cursor-wait",
     className,
   );
@@ -125,7 +133,9 @@ export const Button: React.FC<IButtonProps> = ({
     <span className="loading loading-spinner loading-sm" />
   ) : (
     <>
-      <span className="relative z-1">{children}</span>
+      <span className="relative z-1 inline-block transition-transform duration-300 group-hover:-translate-y-px">
+        {children}
+      </span>
       {leaf && (
         <span className="btn__leaf relative z-1 inline-block text-[1rem] leading-none transition-transform duration-300 group-hover:rotate-12 group-hover:scale-115">
           {leaf}
@@ -139,7 +149,9 @@ export const Button: React.FC<IButtonProps> = ({
       <Link
         to={to}
         className={buttonClasses}
-        onClick={props.onClick as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+        onClick={
+          props.onClick as unknown as React.MouseEventHandler<HTMLAnchorElement>
+        }
       >
         {showFireflies && <ButtonFireflySwarm />}
         {innerContent}
@@ -155,7 +167,9 @@ export const Button: React.FC<IButtonProps> = ({
         target={target}
         rel={rel || (isBlank ? "noopener noreferrer" : undefined)}
         className={buttonClasses}
-        onClick={props.onClick as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+        onClick={
+          props.onClick as unknown as React.MouseEventHandler<HTMLAnchorElement>
+        }
       >
         {showFireflies && <ButtonFireflySwarm />}
         {innerContent}

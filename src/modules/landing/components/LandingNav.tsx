@@ -44,19 +44,34 @@ export const LandingNav: React.FC<ILandingNavProps> = ({
     href: string,
   ) => {
     e.preventDefault();
+    e.stopPropagation();
     setIsOpen(false);
     if (onSectionClick) {
       onSectionClick(href);
-    } else {
-      const el = document.querySelector(href);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
+    }
+
+    if (href === "#hero") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const targetId = href.startsWith("#") ? href.slice(1) : href;
+    const el = document.getElementById(targetId) || document.querySelector(href);
+    if (el) {
+      const navHeight = 70;
+      const elementTop = el.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: Math.max(0, elementTop - navHeight),
+        behavior: "smooth",
+      });
     }
   };
 
   return (
-    <nav className={`nav ${scrolled ? "scrolled" : ""}`} id="nav">
+    <nav
+      className={`nav ${scrolled ? "scrolled" : ""} ${isOpen ? "menu-open" : ""}`}
+      id="nav"
+    >
       <div className="nav__inner">
         <a
           href="#hero"

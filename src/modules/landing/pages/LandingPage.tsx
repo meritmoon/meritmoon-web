@@ -54,12 +54,23 @@ export const LandingPage: React.FC<ILandingPageProps> = ({ hideEnter }) => {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Interactive card hover glow based on cursor position
+    // Interactive card hover glow based on cursor position (cached bounds to avoid layout thrashing)
     const cardSelector = ".ccard, .pcard, .tcard, .mcard, .mtile, .dana-block, .forest-stats";
     const cards = document.querySelectorAll<HTMLElement>(cardSelector);
+    const cardBounds = new WeakMap<HTMLElement, DOMRect>();
+
+    const handleCardMouseEnter = (e: MouseEvent) => {
+      const card = e.currentTarget as HTMLElement;
+      cardBounds.set(card, card.getBoundingClientRect());
+    };
+
     const handleCardMouseMove = (e: MouseEvent) => {
       const card = e.currentTarget as HTMLElement;
-      const rect = card.getBoundingClientRect();
+      let rect = cardBounds.get(card);
+      if (!rect) {
+        rect = card.getBoundingClientRect();
+        cardBounds.set(card, rect);
+      }
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       const pctX = ((x / rect.width) * 100).toFixed(1);
@@ -74,17 +85,20 @@ export const LandingPage: React.FC<ILandingPageProps> = ({ hideEnter }) => {
 
     const handleCardMouseLeave = (e: MouseEvent) => {
       const card = e.currentTarget as HTMLElement;
+      cardBounds.delete(card);
       card.style.background = "";
     };
 
     cards.forEach((card) => {
-      card.addEventListener("mousemove", handleCardMouseMove as EventListener);
-      card.addEventListener("mouseleave", handleCardMouseLeave as EventListener);
+      card.addEventListener("mouseenter", handleCardMouseEnter as EventListener, { passive: true });
+      card.addEventListener("mousemove", handleCardMouseMove as EventListener, { passive: true });
+      card.addEventListener("mouseleave", handleCardMouseLeave as EventListener, { passive: true });
     });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       cards.forEach((card) => {
+        card.removeEventListener("mouseenter", handleCardMouseEnter as EventListener);
         card.removeEventListener("mousemove", handleCardMouseMove as EventListener);
         card.removeEventListener("mouseleave", handleCardMouseLeave as EventListener);
       });

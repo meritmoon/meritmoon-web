@@ -136,8 +136,16 @@ export const ForestCanvas: React.FC = () => {
       nextShooterTime = performance.now() + rand(6000, 16000);
     };
 
-    const drawSky = () => {
-      const g = ctx.createRadialGradient(
+    const bgCanvas = document.createElement("canvas");
+    const bgCtx = bgCanvas.getContext("2d");
+
+    const renderStaticBackground = () => {
+      bgCanvas.width = W;
+      bgCanvas.height = H;
+      if (!bgCtx) return;
+
+      // 1. Paint static sky radial gradient once
+      const g = bgCtx.createRadialGradient(
         W * 0.5,
         H * 0.28,
         0,
@@ -149,24 +157,23 @@ export const ForestCanvas: React.FC = () => {
       g.addColorStop(0.3, "rgba(5,14,8,0.99)");
       g.addColorStop(0.7, "rgba(3,9,5,1)");
       g.addColorStop(1, "rgba(2,6,3,1)");
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, W, H);
-    };
+      bgCtx.fillStyle = g;
+      bgCtx.fillRect(0, 0, W, H);
 
-    const drawClouds = () => {
+      // 2. Paint static nebula clouds once
       driftClouds.forEach((c) => {
-        ctx.save();
-        ctx.translate(c.x, c.y);
-        ctx.rotate(c.angle);
-        const g = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.max(c.rx, c.ry));
-        g.addColorStop(0, rgba(c.color, c.alpha));
-        g.addColorStop(0.5, rgba(c.color, c.alpha * 0.4));
-        g.addColorStop(1, "rgba(0,0,0,0)");
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.ellipse(0, 0, c.rx, c.ry, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
+        bgCtx.save();
+        bgCtx.translate(c.x, c.y);
+        bgCtx.rotate(c.angle);
+        const cg = bgCtx.createRadialGradient(0, 0, 0, 0, 0, Math.max(c.rx, c.ry));
+        cg.addColorStop(0, rgba(c.color, c.alpha));
+        cg.addColorStop(0.5, rgba(c.color, c.alpha * 0.4));
+        cg.addColorStop(1, "rgba(0,0,0,0)");
+        bgCtx.fillStyle = cg;
+        bgCtx.beginPath();
+        bgCtx.ellipse(0, 0, c.rx, c.ry, 0, 0, Math.PI * 2);
+        bgCtx.fill();
+        bgCtx.restore();
       });
     };
 
@@ -226,12 +233,21 @@ export const ForestCanvas: React.FC = () => {
       });
     };
 
+    let isTabActive = !document.hidden;
+
     const animate = () => {
-      ctx.clearRect(0, 0, W, H);
-      drawSky();
-      drawClouds();
+      if (!isTabActive) {
+        return;
+      }
+      // Fast GPU-accelerated blit of cached static sky + nebula background
+      ctx.drawImage(bgCanvas, 0, 0);
       drawStars();
       drawShooters();
+      raf = requestAnimationFrame(animate);
+    };
+
+    const startLoop = () => {
+      cancelAnimationFrame(raf);
       raf = requestAnimationFrame(animate);
     };
 
@@ -240,17 +256,30 @@ export const ForestCanvas: React.FC = () => {
       H = canvas.height = window.innerHeight;
       buildStars();
       buildClouds();
+      renderStaticBackground();
+    };
+
+    const handleVisibilityChange = () => {
+      isTabActive = !document.hidden;
+      if (isTabActive) {
+        startLoop();
+      } else {
+        cancelAnimationFrame(raf);
+      }
     };
 
     buildStars();
     buildClouds();
-    animate();
+    renderStaticBackground();
+    startLoop();
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize, { passive: true });
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 

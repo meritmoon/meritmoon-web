@@ -105,6 +105,12 @@ export const HeroMoonThree: React.FC = () => {
       let lookOffsetX = 0;
       let lookOffsetY = 0;
 
+      // Texture dirty-flag tracking to eliminate redundant GPU texture uploads
+      let lastDrawnHover = -1;
+      let lastDrawnBlink = -1;
+      let lastDrawnLookX = -999;
+      let lastDrawnLookY = -999;
+
       const eyeColor = "#020A05";
       const cursorEl = document.getElementById("cursor");
 
@@ -292,11 +298,17 @@ export const HeroMoonThree: React.FC = () => {
       const raycaster = new THREE.Raycaster();
       const mouse2D = new THREE.Vector2();
 
+      let cachedRect: DOMRect = renderer.domElement.getBoundingClientRect();
+      const updateCachedRect = () => {
+        if (renderer) {
+          cachedRect = renderer.domElement.getBoundingClientRect();
+        }
+      };
+
       const onPointerMove = (e: MouseEvent | Touch) => {
         if (!renderer) return;
-        const rect = renderer.domElement.getBoundingClientRect();
-        const fcx = rect.left + rect.width / 2;
-        const fcy = rect.top + rect.height / 2;
+        const fcx = cachedRect.left + cachedRect.width / 2;
+        const fcy = cachedRect.top + cachedRect.height / 2;
 
         mouseX = (e.clientX - fcx) / (window.innerWidth * 0.5);
         mouseY = (e.clientY - fcy) / (window.innerHeight * 0.5);
@@ -307,8 +319,8 @@ export const HeroMoonThree: React.FC = () => {
         targetRotY = Math.max(-0.14, Math.min(0.14, mouseX * 0.12));
         targetRotX = Math.max(-0.1, Math.min(0.1, mouseY * 0.09));
 
-        mouse2D.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-        mouse2D.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+        mouse2D.x = ((e.clientX - cachedRect.left) / cachedRect.width) * 2 - 1;
+        mouse2D.y = -((e.clientY - cachedRect.top) / cachedRect.height) * 2 + 1;
 
         raycaster.setFromCamera(mouse2D, camera);
         const intersects = raycaster.intersectObjects([moonSphere, facePlane]);
@@ -345,13 +357,34 @@ export const HeroMoonThree: React.FC = () => {
 
       window.addEventListener("mousemove", handleWindowMouseMove, { passive: true });
       window.addEventListener("touchmove", handleTouchMove, { passive: true });
+      window.addEventListener("scroll", updateCachedRect, { passive: true });
       renderer.domElement.addEventListener("mouseenter", handleCanvasMouseEnter);
       renderer.domElement.addEventListener("mouseleave", handleCanvasMouseLeave);
 
-      // Animation Loop
+      // Animation Loop with Visibility Culling
       const clock = new THREE.Clock();
+      let isVisible = true;
+      let isTabActive = !document.hidden;
+
+      const stopLoop = () => {
+        if (animId) {
+          cancelAnimationFrame(animId);
+          animId = null;
+        }
+      };
+
+      const startLoop = () => {
+        if (!animId && isVisible && isTabActive) {
+          animId = requestAnimationFrame(animate);
+        }
+      };
 
       const animate = () => {
+        if (!isVisible || !isTabActive) {
+          animId = null;
+          return;
+        }
+
         animId = requestAnimationFrame(animate);
         const elapsed = clock.getElapsedTime();
 
@@ -370,15 +403,59 @@ export const HeroMoonThree: React.FC = () => {
         const targetScale = 1.0 + hoverProgress * 0.05;
         moonGroup.scale.set(targetScale, targetScale, targetScale);
 
-        // Update Face Canvas Texture
-        drawMoonTexture();
+        // Update Face Canvas Texture ONLY when parameters actually change (dirty-flagged)
+        const hoverDelta = Math.abs(hoverProgress - lastDrawnHover);
+        const blinkDelta = Math.abs(blinkProgress - lastDrawnBlink);
+        const lookDelta =
+          Math.abs(lookOffsetX - lastDrawnLookX) +
+          Math.abs(lookOffsetY - lastDrawnLookY);
+
+        if (hoverDelta > 0.002 || blinkDelta > 0.002 || lookDelta > 0.05) {
+          drawMoonTexture();
+          lastDrawnHover = hoverProgress;
+          lastDrawnBlink = blinkProgress;
+          lastDrawnLookX = lookOffsetX;
+          lastDrawnLookY = lookOffsetY;
+        }
 
         if (renderer) {
           renderer.render(scene, camera);
         }
       };
 
-      animate();
+      // Draw initial texture once, then start animation loop
+      drawMoonTexture();
+      lastDrawnHover = hoverProgress;
+      lastDrawnBlink = blinkProgress;
+      lastDrawnLookX = lookOffsetX;
+      lastDrawnLookY = lookOffsetY;
+      startLoop();
+
+      // Viewport Intersection Culling: pause Three.js rendering when scrolled away
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          isVisible = entry ? entry.isIntersecting : true;
+          if (isVisible) {
+            startLoop();
+          } else {
+            stopLoop();
+          }
+        },
+        { threshold: 0.05 }
+      );
+      observer.observe(mount);
+
+      // Tab visibility culling: pause when browser tab is inactive
+      const handleVisibilityChange = () => {
+        isTabActive = !document.hidden;
+        if (isTabActive && isVisible) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      };
+      document.addEventListener("visibilitychange", handleVisibilityChange);
 
       // Handle Resize
       const handleResize = () => {
@@ -388,16 +465,20 @@ export const HeroMoonThree: React.FC = () => {
         camera.aspect = nw / nh;
         camera.updateProjectionMatrix();
         renderer.setSize(nw, nh);
+        updateCachedRect();
       };
 
       window.addEventListener("resize", handleResize);
 
       return () => {
-        if (animId) cancelAnimationFrame(animId);
+        stopLoop();
         if (blinkTimeout) clearTimeout(blinkTimeout);
 
+        observer.disconnect();
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
         window.removeEventListener("mousemove", handleWindowMouseMove);
         window.removeEventListener("touchmove", handleTouchMove);
+        window.removeEventListener("scroll", updateCachedRect);
         window.removeEventListener("resize", handleResize);
 
         if (cursorEl) cursorEl.classList.remove("hidden");

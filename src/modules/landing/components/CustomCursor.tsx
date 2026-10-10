@@ -25,14 +25,31 @@ export const CustomCursor: React.FC = () => {
     let rafId: number;
     let hasMoved = false;
 
+    let isTicking = false;
+
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
+    const setCursorPosition = (x: number, y: number) => {
+      const style = cursor.style as CSSStyleDeclaration & { translate?: string };
+      if ("translate" in document.documentElement.style) {
+        style.translate = `${x}px ${y}px`;
+      } else {
+        style.left = `${x}px`;
+        style.top = `${y}px`;
+      }
+    };
+
     const tick = () => {
-      cx = lerp(cx, tx, 0.2);
-      cy = lerp(cy, ty, 0.2);
-      cursor.style.left = `${cx}px`;
-      cursor.style.top = `${cy}px`;
-      rafId = requestAnimationFrame(tick);
+      cx = lerp(cx, tx, 0.22);
+      cy = lerp(cy, ty, 0.22);
+      setCursorPosition(cx, cy);
+
+      // Only schedule next frame while cursor is in motion towards target
+      if (Math.abs(cx - tx) > 0.1 || Math.abs(cy - ty) > 0.1) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        isTicking = false;
+      }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -42,7 +59,12 @@ export const CustomCursor: React.FC = () => {
         hasMoved = true;
         cx = tx;
         cy = ty;
+        setCursorPosition(cx, cy);
         cursor.classList.remove("hidden");
+      }
+      if (!isTicking) {
+        isTicking = true;
+        rafId = requestAnimationFrame(tick);
       }
     };
 

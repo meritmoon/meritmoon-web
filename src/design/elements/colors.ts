@@ -73,15 +73,15 @@ export const colors = {
     glowOuterRgb: "46, 139, 87",
   },
 
-  // Night Theme (Dark Mode - Forest Night, Deep Ancient Woods)
+  // Night Theme (Dark Mode - Deep Dark Blue Night Sky & Moonlight)
   night: {
     primary: "#2E8B57",
     primaryRgb: "46, 139, 87",
     primaryLight: "#4DBF82",
     primaryDark: "#1A5235",
-    background: "#020A05", // Canvas scaffold / forest floor
-    surface: "#071A0D", // Modals, elevated surfaces
-    card: "#041209", // Mid-depth forest
+    background: "#050C18", // Canvas scaffold / dark blue night sky
+    surface: "#091628", // Modals, elevated surfaces
+    card: "#071222", // Mid-depth night sky
     border: "rgba(200, 216, 192, 0.14)", // border-glass
     divider: "rgba(200, 216, 192, 0.10)", // border-moss
     textPrimary: "#F4FAF0", // Primary headings & copy
@@ -94,12 +94,12 @@ export const colors = {
 
   // MeritMoon Glassmorphism Tokens
   glass: {
-    nav: "rgba(4, 16, 9, 0.65)",
-    card: "rgba(6, 22, 13, 0.28)",
-    cardHover: "rgba(10, 34, 19, 0.42)",
-    form: "rgba(7, 26, 13, 0.55)",
-    project: "rgba(6, 22, 13, 0.28)",
-    projectHover: "rgba(10, 34, 19, 0.42)",
+    nav: "rgba(5, 13, 25, 0.70)",
+    card: "rgba(7, 18, 34, 0.25)",
+    cardHover: "rgba(10, 26, 48, 0.38)",
+    form: "rgba(9, 22, 40, 0.55)",
+    project: "rgba(7, 18, 34, 0.25)",
+    projectHover: "rgba(10, 26, 48, 0.38)",
     border: "rgba(200, 216, 192, 0.14)",
     borderHover: "rgba(77, 191, 130, 0.48)",
     tag: "rgba(46, 139, 87, 0.85)",
