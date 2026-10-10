@@ -80,11 +80,11 @@ export const Button: React.FC<IButtonProps> = ({
     // Secondary / Ghost (.btn--ghost): frozen dark glass card, silver border, emerald hover glow
     [ButtonVariants.SECONDARY]: cn(
       "btn--ghost",
-      "bg-[rgba(6,22,13,0.22)] backdrop-blur-[20px] backdrop-saturate-160",
+      "bg-[rgba(7,20,36,0.25)] backdrop-blur-[20px] backdrop-saturate-160",
       "!text-[#F4FAF0] [color:#F4FAF0] [-webkit-text-fill-color:#F4FAF0]",
       "border border-[rgba(200,216,192,0.15)]",
       "shadow-[0_16px_40px_rgba(0,0,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.16),inset_0_0_24px_rgba(200,216,192,0.03)]",
-      "hover:border-[#4DBF82] hover:bg-[rgba(10,34,19,0.35)]",
+      "hover:border-[#4DBF82] hover:bg-[rgba(12,34,58,0.38)]",
       "hover:!text-white hover:[color:#ffffff] hover:[-webkit-text-fill-color:#ffffff]",
       "hover:shadow-[0_0_10px_#4DBF82,0_0_24px_rgba(46,139,87,0.45),0_0_45px_rgba(26,82,53,0.25)]",
       "hover:[text-shadow:0_0_8px_#4DBF82]",
